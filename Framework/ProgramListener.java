@@ -835,6 +835,15 @@ public class ProgramListener extends FSMBaseListener {
                     "end\n" +
                     "endmodule");
 
+            adder.print("module And(c,a,b);\n" +
+                    "parameter SIZE = 8;\n" +
+                    "output reg [SIZE-1:0] c;\n" +
+                    "input [SIZE-1:0] a,b;\n" +
+                    "always @ (*) begin\n" +
+                    "c <= a & b;\n" +
+                    "end\n" +
+                    "endmodule");
+
             adder.close();
 
             PrintWriter file = new PrintWriter("./" + this.programName + "_Generate/" + "DFF.v");
@@ -901,6 +910,8 @@ public class ProgramListener extends FSMBaseListener {
             comp.println("end");
             comp.println("endmodule");
             comp.close();
+
+
 
             /**
              * END
