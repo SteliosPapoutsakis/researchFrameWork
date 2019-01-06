@@ -7,9 +7,6 @@ with that info it hands off the data to other classes and then prints that info 
 
 //import jdk.nashorn.internal.parser.DateParser;
 
-import com.sun.org.apache.xpath.internal.operations.Div;
-import com.sun.org.apache.xpath.internal.operations.Mult;
-
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
@@ -202,21 +199,22 @@ public class ProgramListener extends FSMBaseListener {
                 j++;
             }
 
+
             // finding 1st input for adder
-            if (ctx.component(0).register() != null)
-                newAdder.addInput(findComp(ctx.component(0).register().NAME().getText()), 0);
-            else if (ctx.component(0).integer() != null)
-                newAdder.addInput(new FixedNumber(Integer.parseInt(ctx.component(0).integer().getText()), reg.getBitSize()), 0);
-            else if (ctx.component(0).var() != null)
-                newAdder.addInput(findComp(ctx.component(0).var().getText()), 0);
+            if (ctx.expression(0).register() != null)
+                newAdder.addInput(findComp(ctx.expression(0).register().NAME().getText()), 0);
+            else if (ctx.expression(0).integer() != null)
+                newAdder.addInput(new FixedNumber(Integer.parseInt(ctx.expression(0).integer().getText()), reg.getBitSize()), 0);
+            else if (ctx.expression(0).var() != null)
+                newAdder.addInput(findComp(ctx.expression(0).var().getText()), 0);
 
             //finding second input for adder
-            if (ctx.component(1).register() != null)
-                newAdder.addInput(findComp(ctx.component(1).register().NAME().getText()), 1);
-            else if (ctx.component(1).integer() != null)
-                newAdder.addInput(new FixedNumber(Integer.parseInt(ctx.component(1).integer().getText()), reg.getBitSize()), 1);
-            else if (ctx.component(1).var() != null)
-                newAdder.addInput(findComp(ctx.component(1).var().getText()), 1);
+            if (ctx.expression(1).register() != null)
+                newAdder.addInput(findComp(ctx.expression(1).register().NAME().getText()), 1);
+            else if (ctx.expression(1).integer() != null)
+                newAdder.addInput(new FixedNumber(Integer.parseInt(ctx.expression(1).integer().getText()), reg.getBitSize()), 1);
+            else if (ctx.expression(1).var() != null)
+                newAdder.addInput(findComp(ctx.expression(1).var().getText()), 1);
 
 
         }
@@ -250,20 +248,20 @@ public class ProgramListener extends FSMBaseListener {
             }
 
             // finding 1st input for adder
-            if (ctx.component(0).register() != null)
-                mult.addInput(findComp(ctx.component(0).register().NAME().getText()), 0);
-            else if (ctx.component(0).integer() != null)
-                mult.addInput(new FixedNumber(Integer.parseInt(ctx.component(0).integer().getText()), reg.getBitSize()), 0);
-            else if (ctx.component(0).var() != null)
-                mult.addInput(findComp(ctx.component(0).var().getText()), 0);
+            if (ctx.expression(0).register() != null)
+                mult.addInput(findComp(ctx.expression(0).register().NAME().getText()), 0);
+            else if (ctx.expression(0).integer() != null)
+                mult.addInput(new FixedNumber(Integer.parseInt(ctx.expression(0).integer().getText()), reg.getBitSize()), 0);
+            else if (ctx.expression(0).var() != null)
+                mult.addInput(findComp(ctx.expression(0).var().getText()), 0);
 
             //finding second input for adder
-            if (ctx.component(1).register() != null)
-                mult.addInput(findComp(ctx.component(1).register().NAME().getText()), 1);
-            else if (ctx.component(1).integer() != null)
-                mult.addInput(new FixedNumber(Integer.parseInt(ctx.component(1).integer().getText()), reg.getBitSize()), 1);
-            else if (ctx.component(1).var() != null)
-                mult.addInput(findComp(ctx.component(1).var().getText()), 1);
+            if (ctx.expression(1).register() != null)
+                mult.addInput(findComp(ctx.expression(1).register().NAME().getText()), 1);
+            else if (ctx.expression(1).integer() != null)
+                mult.addInput(new FixedNumber(Integer.parseInt(ctx.expression(1).integer().getText()), reg.getBitSize()), 1);
+            else if (ctx.expression(1).var() != null)
+                mult.addInput(findComp(ctx.expression(1).var().getText()), 1);
 
 
         }
@@ -296,20 +294,20 @@ public class ProgramListener extends FSMBaseListener {
             }
 
             // finding 1st input for adder
-            if (ctx.component(0).register() != null)
-                div.addInput(findComp(ctx.component(0).register().NAME().getText()), 0);
-            else if (ctx.component(0).integer() != null)
-                div.addInput(new FixedNumber(Integer.parseInt(ctx.component(0).integer().getText()), reg.getBitSize()), 0);
-            else if (ctx.component(0).var() != null)
-                div.addInput(findComp(ctx.component(0).var().getText()), 0);
+            if (ctx.expression(0).register() != null)
+                div.addInput(findComp(ctx.expression(0).register().NAME().getText()), 0);
+            else if (ctx.expression(0).integer() != null)
+                div.addInput(new FixedNumber(Integer.parseInt(ctx.expression(0).integer().getText()), reg.getBitSize()), 0);
+            else if (ctx.expression(0).var() != null)
+                div.addInput(findComp(ctx.expression(0).var().getText()), 0);
 
             //finding second input for adder
-            if (ctx.component(1).register() != null)
-                div.addInput(findComp(ctx.component(1).register().NAME().getText()), 1);
-            else if (ctx.component(1).integer() != null)
-                div.addInput(new FixedNumber(Integer.parseInt(ctx.component(1).integer().getText()), reg.getBitSize()), 1);
-            else if (ctx.component(1).var() != null)
-                div.addInput(findComp(ctx.component(1).var().getText()), 1);
+            if (ctx.expression(1).register() != null)
+                div.addInput(findComp(ctx.expression(1).register().NAME().getText()), 1);
+            else if (ctx.expression(1).integer() != null)
+                div.addInput(new FixedNumber(Integer.parseInt(ctx.expression(1).integer().getText()), reg.getBitSize()), 1);
+            else if (ctx.expression(1).var() != null)
+                div.addInput(findComp(ctx.expression(1).var().getText()), 1);
 
 
         }
@@ -341,21 +339,23 @@ public class ProgramListener extends FSMBaseListener {
                 j++;
             }
 
+
+
             // finding 1st input for adder
-            if (ctx.component(0).register() != null)
-                newSub.addInput(findComp(ctx.component(0).register().NAME().getText()), 0);
-            else if (ctx.component(0).integer() != null)
-                newSub.addInput(new FixedNumber(Integer.parseInt(ctx.component(0).integer().getText()), reg.getBitSize()), 0);
-            else if (ctx.component(0).var() != null)
-                newSub.addInput(findComp(ctx.component(0).var().getText()), 0);
+            if (ctx.expression(0).register() != null)
+                newSub.addInput(findComp(ctx.expression(0).register().NAME().getText()), 0);
+            else if (ctx.expression(0).integer() != null)
+                newSub.addInput(new FixedNumber(Integer.parseInt(ctx.expression(0).integer().getText()), reg.getBitSize()), 0);
+            else if (ctx.expression(0).var() != null)
+                newSub.addInput(findComp(ctx.expression(0).var().getText()), 0);
 
             //finding second input for adder
-            if (ctx.component(1).register() != null)
-                newSub.addInput(findComp(ctx.component(1).register().NAME().getText()), 1);
-            else if (ctx.component(1).integer() != null)
-                newSub.addInput(new FixedNumber(Integer.parseInt(ctx.component(1).integer().getText()), reg.getBitSize()), 1);
-            else if (ctx.component(1).var() != null)
-                newSub.addInput(findComp(ctx.component(1).var().getText()), 1);
+            if (ctx.expression(1).register() != null)
+                newSub.addInput(findComp(ctx.expression(1).register().NAME().getText()), 1);
+            else if (ctx.expression(1).integer() != null)
+                newSub.addInput(new FixedNumber(Integer.parseInt(ctx.expression(1).integer().getText()), reg.getBitSize()), 1);
+            else if (ctx.expression(1).var() != null)
+                newSub.addInput(findComp(ctx.expression(1).var().getText()), 1);
 
 
         }
@@ -365,24 +365,74 @@ public class ProgramListener extends FSMBaseListener {
 
     @Override
     public void enterReg_assigment(FSMParser.Reg_assigmentContext ctx) {
+
         //if nodes parent was a register_assign node
         if (ctx.getParent() instanceof FSMParser.Register_assignContext) {
             FSMParser.Register_assignContext regCont = (FSMParser.Register_assignContext) ctx.getParent();
             Register reg = (Register) findComp(regCont.register().NAME().getText());
             //if register, assign register
-            if (ctx.register() != null) {
-                this.regInputs.get(reg).add(findComp(ctx.register().NAME().getText()));
-            } else if (ctx.integer() != null) {
+            if (ctx.expression().register() != null) {
+                this.regInputs.get(reg).add(findComp(ctx.expression().register().NAME().getText()));
+            } else if (ctx.expression().integer() != null) {
                 //if int assign an int
                 this.regInputs.get(reg).add(new FixedNumber(Integer.parseInt(
-                        ctx.integer().getText()), reg.getBitSize()));
+                        ctx.expression().integer().getText()), reg.getBitSize()));
 
 // if assigned var, assign var
-            } else if (ctx.var() != null) {
-                this.regInputs.get(reg).add(findComp(ctx.var().NAME().getText()));
+            } else if (ctx.expression().var() != null) {
+                this.regInputs.get(reg).add(findComp(ctx.expression().var().NAME().getText()));
 
-            }
+                }
+
         }
+    }
+
+    @Override
+    public void enterAnd_assigment(FSMParser.And_assigmentContext ctx) {
+        Register reg;
+        // if this is coming from a Register_Assign context
+        if (ctx.getParent() instanceof FSMParser.Register_assignContext) {
+
+
+            FSMParser.Register_assignContext regCont = (FSMParser.Register_assignContext) ctx.getParent();
+            reg = (Register) findComp(regCont.register().NAME().getText());
+
+
+            And newand = null;
+            int j = 1;
+
+            // giving it a unique name
+            for (int i = 0; i < regCont.getChildCount(); i++) {
+                if (findComp("Sub_" + j + reg.getName()) == null) {
+                    newand = new And("And_" + j + reg.getName(), reg.getBitSize());
+                    this.comps.add(newand);
+                    this.regInputs.get(reg).add(newand);
+                    break;
+                }
+                j++;
+            }
+
+
+
+            // finding 1st input for adder
+            if (ctx.expression(0).register() != null)
+                newand.addInput(findComp(ctx.expression(0).register().NAME().getText()), 0);
+            else if (ctx.expression(0).integer() != null)
+                newand.addInput(new FixedNumber(Integer.parseInt(ctx.expression(0).integer().getText()), reg.getBitSize()), 0);
+            else if (ctx.expression(0).var() != null)
+                newand.addInput(findComp(ctx.expression(0).var().getText()), 0);
+
+            //finding second input for adder
+            if (ctx.expression(1).register() != null)
+                newand.addInput(findComp(ctx.expression(1).register().NAME().getText()), 1);
+            else if (ctx.expression(1).integer() != null)
+                newand.addInput(new FixedNumber(Integer.parseInt(ctx.expression(1).integer().getText()), reg.getBitSize()), 1);
+            else if (ctx.expression(1).var() != null)
+                newand.addInput(findComp(ctx.expression(1).var().getText()), 1);
+
+
+        }
+
     }
 
 
@@ -397,10 +447,10 @@ public class ProgramListener extends FSMBaseListener {
                     context.STATENUMBER().getText().substring(6, context.STATENUMBER().getText().length()));
 
             //checking to see if true or false
-            if (Integer.parseInt(ctx.component().integer().opp.getText()) == 1) {
+            if (Integer.parseInt(ctx.expression().integer().opp.getText()) == 1) {
                 this.conditions.get(0).put(inputflag, nextState);
                 this.conditionsOrder.add(inputflag);
-            } else if (Integer.parseInt(ctx.component().integer().opp.getText()) == 0) {
+            } else if (Integer.parseInt(ctx.expression().integer().opp.getText()) == 0) {
                 this.conditions.get(1).put(inputflag, nextState);
                 this.conditionsOrder.add(inputflag);
             }
@@ -417,16 +467,16 @@ public class ProgramListener extends FSMBaseListener {
             compare1 = findComp(ctx.var().NAME().getText());
         }
 
-        if (ctx.component().var() != null) {
-            compare2 = findComp(ctx.component().var().NAME().getText());
-        } else if (ctx.component().integer() != null) {
-            int temp = Integer.parseInt(ctx.component().integer().getText());
+        if (ctx.expression().var() != null) {
+            compare2 = findComp(ctx.expression().var().NAME().getText());
+        } else if (ctx.expression().integer() != null) {
+            int temp = Integer.parseInt(ctx.expression().integer().getText());
             FixedNumber tempfixed = new FixedNumber(temp, compare1.getBitSize());
             compare2 = tempfixed;
             this.comps.add(tempfixed);
 
         } else {
-            compare2 = findComp(ctx.component().register().NAME().getText());
+            compare2 = findComp(ctx.expression().register().NAME().getText());
         }
 
         String text = compare1.getName().substring(0, 1) + compare2.getName().substring(0, 1) + ctx.opp.getType();
@@ -952,7 +1002,8 @@ public class ProgramListener extends FSMBaseListener {
             dataPath.get(7).append(reg.defineFlipFlop());
 
         } else if (comp instanceof Adder || comp instanceof Mux || comp instanceof Comp ||
-                comp instanceof Multiplier || comp instanceof Subtractor || comp instanceof Divider) {
+                comp instanceof Multiplier || comp instanceof Subtractor || comp instanceof Divider || comp
+                instanceof And) {
             dataPath.get(5).append(comp.defineWire());
             dataPath.get(6).append(comp.defineComp());
         }

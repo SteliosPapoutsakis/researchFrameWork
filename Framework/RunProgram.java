@@ -48,36 +48,7 @@ public class RunProgram {
 
 
     }
-    public void run(String fileName, String file, String testing) {
-        file ="Start FSM\n" +
-                "input Size 5 Var N \n" +
-                "output Size 5 Reg R0\n" +
-                "State:0 Define\n" +
-                "Reg R0 = 1\n" +
-                "Size 5 Reg A = Var N\n" +
-                "Size 5 Reg R1 = 0\n" +
-                "Next State State:1 \n" +
-                "End\n" +
-                "State:1 Define\n" +
-                "Reg R0 = Reg R0\n" +
-                "Reg A = Reg A\n" +
-                "Reg R1 = Reg R1\n" +
-                "Next State if Reg A ~= 0 State:2\n" +
-                "Next State State:3 \n" +
-                "End\n" +
-                "State:2 Define\n" +
-                "Reg R0 = Reg R1\n" +
-                "Reg R1 = Reg R1 + Reg R0\n" +
-                "Reg A = Reg A - 1\n" +
-                "Next State State:1\n" +
-                "End\n" +
-                "State:3 Define\n" +
-                "Reg R0 = Reg R0\n" +
-                "Reg R1 = Reg R1\n" +
-                "Reg A = Reg A\n" +
-                "Next State State:3 \n" +
-                "End\n" +
-                "End FSM\n";
+    public void run(String fileName, String file) {
         FSMLexer lexer = new FSMLexer(CharStreams.fromString(file));
         FSMParser parser = new FSMParser(new CommonTokenStream(lexer));
         ProgramListener listener = new ProgramListener(fileName);

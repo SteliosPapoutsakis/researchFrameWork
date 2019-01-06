@@ -1,5 +1,5 @@
-// Generated from C:/research/javalib/FSM/src/Framework\FSM.g4 by ANTLR 4.7
-package Framework;
+package Framework;// Generated from C:/research/javalib/FSM/src/Framework\FSM.g4 by ANTLR 4.7
+
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -68,6 +68,26 @@ public interface FSMListener extends ParseTreeListener {
 	 */
 	void exitAdder_assign(FSMParser.Adder_assignContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link FSMParser#and_assigment}.
+	 * @param ctx the parse tree
+	 */
+	void enterAnd_assigment(FSMParser.And_assigmentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FSMParser#and_assigment}.
+	 * @param ctx the parse tree
+	 */
+	void exitAnd_assigment(FSMParser.And_assigmentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FSMParser#or_assigment}.
+	 * @param ctx the parse tree
+	 */
+	void enterOr_assigment(FSMParser.Or_assigmentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FSMParser#or_assigment}.
+	 * @param ctx the parse tree
+	 */
+	void exitOr_assigment(FSMParser.Or_assigmentContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link FSMParser#integer}.
 	 * @param ctx the parse tree
 	 */
@@ -78,15 +98,15 @@ public interface FSMListener extends ParseTreeListener {
 	 */
 	void exitInteger(FSMParser.IntegerContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link FSMParser#component}.
+	 * Enter a parse tree produced by {@link FSMParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterComponent(FSMParser.ComponentContext ctx);
+	void enterExpression(FSMParser.ExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link FSMParser#component}.
+	 * Exit a parse tree produced by {@link FSMParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitComponent(FSMParser.ComponentContext ctx);
+	void exitExpression(FSMParser.ExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FSMParser#register}.
 	 * @param ctx the parse tree

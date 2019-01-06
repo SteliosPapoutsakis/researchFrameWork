@@ -4,7 +4,7 @@
 //import java.util.ArrayList;
 //import java.util.HashMap;
 //
-//public class FSMListenerExtend extends FSMBaseListener {
+//public class FSMListenerExtend extends Framework.FSMBaseListener {
 //
 //    private File dataPath;
 //    private File controller;
@@ -19,7 +19,7 @@
 //    }
 //
 //    @Override
-//    public void enterRegister_assign(FSMParser.Register_assignContext ctx) {
+//    public void enterRegister_assign(Framework.FSMParser.Register_assignContext ctx) {
 //        if (ctx.register().NEW() != null) {
 //            Register temp = new Register(ctx.register().NAME().getText(), Integer.parseInt(
 //                    ctx.register().integer().INT().getText()),
@@ -79,7 +79,7 @@
 //        }
 //    }
 //
-//    @Override public void exitFsm(FSMParser.FsmContext ctx) {
+//    @Override public void exitFsm(Framework.FSMParser.FsmContext ctx) {
 //        ArrayList<Mux> muxes = new ArrayList<>();
 //        for(VerilogComp comp: this.comps)
 //        {
@@ -105,7 +105,7 @@
 //
 //    }
 //
-//    @Override public void enterCondition(FSMParser.ConditionContext ctx) {
+//    @Override public void enterCondition(Framework.FSMParser.ConditionContext ctx) {
 //        Var output = null;
 //       if(findComp("flag_" + ctx.getText()) == null) {
 //           output = new Var("flag_" + ctx.getText(),

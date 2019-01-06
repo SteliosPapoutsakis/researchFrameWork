@@ -1,5 +1,4 @@
-// Generated from C:/research/javalib/FSM/src/Framework\FSM.g4 by ANTLR 4.7
-package Framework;
+package Framework;// Generated from C:/research/javalib/FSM/src/Framework\FSM.g4 by ANTLR 4.7
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -88,6 +87,30 @@ public class FSMBaseListener implements FSMListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAnd_assigment(FSMParser.And_assigmentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAnd_assigment(FSMParser.And_assigmentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterOr_assigment(FSMParser.Or_assigmentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitOr_assigment(FSMParser.Or_assigmentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterInteger(FSMParser.IntegerContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -100,13 +123,13 @@ public class FSMBaseListener implements FSMListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterComponent(FSMParser.ComponentContext ctx) { }
+	@Override public void enterExpression(FSMParser.ExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitComponent(FSMParser.ComponentContext ctx) { }
+	@Override public void exitExpression(FSMParser.ExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

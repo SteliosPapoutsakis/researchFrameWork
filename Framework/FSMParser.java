@@ -1,13 +1,10 @@
-// Generated from C:/research/javalib/FSM/src/Framework\FSM.g4 by ANTLR 4.7
-package Framework;
+package Framework;// Generated from C:/research/javalib/FSM/src/Framework\FSM.g4 by ANTLR 4.7
+
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
 import java.util.List;
-import java.util.Iterator;
-import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class FSMParser extends Parser {
@@ -18,32 +15,35 @@ public class FSMParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, T__10=11, Clk=12, RESET=13, EQUALS=14, GREATERTHAN=15, LESSTHAN=16, 
-		NOT=17, INPUT=18, OUTPUT=19, ASSIGN=20, COMMA=21, REG=22, VAR=23, NAME=24, 
-		STATENUMBER=25, NEGATIVEINT=26, INT=27, WHITESPACE=28, NEWLINE=29;
+		T__9=10, T__10=11, AND=12, OR=13, Clk=14, RESET=15, EQUALS=16, GREATERTHAN=17, 
+		LESSTHAN=18, NOT=19, INPUT=20, OUTPUT=21, ASSIGN=22, COMMA=23, REG=24, 
+		VAR=25, NAME=26, STATENUMBER=27, NEGATIVEINT=28, INT=29, WHITESPACE=30, 
+		NEWLINE=31;
 	public static final int
 		RULE_fsm = 0, RULE_next_state = 1, RULE_condition = 2, RULE_state = 3, 
-		RULE_register_assign = 4, RULE_adder_assign = 5, RULE_integer = 6, RULE_component = 7, 
-		RULE_register = 8, RULE_var = 9, RULE_var_assign = 10, RULE_var_assigment = 11, 
-		RULE_sub_assignment = 12, RULE_mult_assigment = 13, RULE_div_assigment = 14, 
-		RULE_reg_assigment = 15, RULE_inputs = 16, RULE_outputs = 17;
+		RULE_register_assign = 4, RULE_adder_assign = 5, RULE_and_assigment = 6, 
+		RULE_or_assigment = 7, RULE_integer = 8, RULE_expression = 9, RULE_register = 10, 
+		RULE_var = 11, RULE_var_assign = 12, RULE_var_assigment = 13, RULE_sub_assignment = 14, 
+		RULE_mult_assigment = 15, RULE_div_assigment = 16, RULE_reg_assigment = 17, 
+		RULE_inputs = 18, RULE_outputs = 19;
 	public static final String[] ruleNames = {
 		"fsm", "next_state", "condition", "state", "register_assign", "adder_assign", 
-		"integer", "component", "register", "var", "var_assign", "var_assigment", 
-		"sub_assignment", "mult_assigment", "div_assigment", "reg_assigment", 
-		"inputs", "outputs"
+		"and_assigment", "or_assigment", "integer", "expression", "register", 
+		"var", "var_assign", "var_assigment", "sub_assignment", "mult_assigment", 
+		"div_assigment", "reg_assigment", "inputs", "outputs"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
 		null, "'Start FSM'", "'End FSM'", "'Next State'", "'if'", "'Define'", 
-		"'End'", "'+'", "'Size'", "'-'", "'*'", "'/'", "'C_'", "'R_'", "'equals'", 
-		null, null, null, "'input'", "'output'", null, "','", "'Reg'", "'Var'"
+		"'End'", "'+'", "'Size'", "'-'", "'*'", "'/'", null, null, "'C_'", "'R_'", 
+		"'equals'", null, null, null, "'input'", "'output'", null, "','", "'Reg'", 
+		"'Var'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
-		"Clk", "RESET", "EQUALS", "GREATERTHAN", "LESSTHAN", "NOT", "INPUT", "OUTPUT", 
-		"ASSIGN", "COMMA", "REG", "VAR", "NAME", "STATENUMBER", "NEGATIVEINT", 
-		"INT", "WHITESPACE", "NEWLINE"
+		"AND", "OR", "Clk", "RESET", "EQUALS", "GREATERTHAN", "LESSTHAN", "NOT", 
+		"INPUT", "OUTPUT", "ASSIGN", "COMMA", "REG", "VAR", "NAME", "STATENUMBER", 
+		"NEGATIVEINT", "INT", "WHITESPACE", "NEWLINE"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -114,7 +114,7 @@ public class FSMParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_fsm; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FSMListener ) ((FSMListener)listener).enterFsm(this);
+			if ( listener instanceof FSMListener) ((FSMListener)listener).enterFsm(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
@@ -129,29 +129,29 @@ public class FSMParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(36);
+			setState(40);
 			match(T__0);
-			setState(37);
+			setState(41);
 			inputs();
-			setState(38);
+			setState(42);
 			outputs();
-			setState(40); 
+			setState(44); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(39);
+				setState(43);
 				state();
 				}
 				}
-				setState(42); 
+				setState(46); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==STATENUMBER );
-			setState(44);
+			setState(48);
 			match(T__1);
-			setState(45);
+			setState(49);
 			match(EOF);
 			}
 		}
@@ -192,19 +192,19 @@ public class FSMParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(47);
+			setState(51);
 			match(T__2);
-			setState(49);
+			setState(53);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==T__3) {
 				{
-				setState(48);
+				setState(52);
 				condition();
 				}
 			}
 
-			setState(51);
+			setState(55);
 			match(STATENUMBER);
 			}
 		}
@@ -221,8 +221,8 @@ public class FSMParser extends Parser {
 
 	public static class ConditionContext extends ParserRuleContext {
 		public Token opp;
-		public ComponentContext component() {
-			return getRuleContext(ComponentContext.class,0);
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
 		}
 		public RegisterContext register() {
 			return getRuleContext(RegisterContext.class,0);
@@ -256,25 +256,25 @@ public class FSMParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(53);
+			setState(57);
 			match(T__3);
-			setState(56);
+			setState(60);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
 			case 1:
 				{
-				setState(54);
+				setState(58);
 				register();
 				}
 				break;
 			case 2:
 				{
-				setState(55);
+				setState(59);
 				var();
 				}
 				break;
 			}
-			setState(58);
+			setState(62);
 			((ConditionContext)_localctx).opp = _input.LT(1);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQUALS) | (1L << GREATERTHAN) | (1L << LESSTHAN) | (1L << NOT))) != 0)) ) {
@@ -285,8 +285,8 @@ public class FSMParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(59);
-			component();
+			setState(63);
+			expression();
 			}
 			}
 		}
@@ -348,22 +348,22 @@ public class FSMParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(61);
+			setState(65);
 			match(STATENUMBER);
-			setState(62);
+			setState(66);
 			match(T__4);
-			setState(68);
+			setState(72);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__7) | (1L << ASSIGN) | (1L << REG) | (1L << VAR))) != 0)) {
 				{
-				setState(66);
+				setState(70);
 				_errHandler.sync(this);
 				switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
 				case 1:
 					{
 					{
-					setState(63);
+					setState(67);
 					register_assign();
 					}
 					}
@@ -371,38 +371,38 @@ public class FSMParser extends Parser {
 				case 2:
 					{
 					{
-					setState(64);
+					setState(68);
 					adder_assign();
 					}
 					}
 					break;
 				case 3:
 					{
-					setState(65);
+					setState(69);
 					var_assign();
 					}
 					break;
 				}
 				}
-				setState(70);
+				setState(74);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(74);
+			setState(78);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T__2) {
 				{
 				{
-				setState(71);
+				setState(75);
 				next_state();
 				}
 				}
-				setState(76);
+				setState(80);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(77);
+			setState(81);
 			match(T__5);
 			}
 		}
@@ -436,6 +436,12 @@ public class FSMParser extends Parser {
 		public Div_assigmentContext div_assigment() {
 			return getRuleContext(Div_assigmentContext.class,0);
 		}
+		public And_assigmentContext and_assigment() {
+			return getRuleContext(And_assigmentContext.class,0);
+		}
+		public Or_assigmentContext or_assigment() {
+			return getRuleContext(Or_assigmentContext.class,0);
+		}
 		public Register_assignContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -456,39 +462,51 @@ public class FSMParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(79);
+			setState(83);
 			register();
-			setState(85);
+			setState(91);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
 				{
-				setState(80);
+				setState(84);
 				reg_assigment();
 				}
 				break;
 			case 2:
 				{
-				setState(81);
+				setState(85);
 				adder_assign();
 				}
 				break;
 			case 3:
 				{
-				setState(82);
+				setState(86);
 				sub_assignment();
 				}
 				break;
 			case 4:
 				{
-				setState(83);
+				setState(87);
 				mult_assigment();
 				}
 				break;
 			case 5:
 				{
-				setState(84);
+				setState(88);
 				div_assigment();
+				}
+				break;
+			case 6:
+				{
+				setState(89);
+				and_assigment();
+				}
+				break;
+			case 7:
+				{
+				setState(90);
+				or_assigment();
 				}
 				break;
 			}
@@ -507,11 +525,11 @@ public class FSMParser extends Parser {
 
 	public static class Adder_assignContext extends ParserRuleContext {
 		public TerminalNode ASSIGN() { return getToken(FSMParser.ASSIGN, 0); }
-		public List<ComponentContext> component() {
-			return getRuleContexts(ComponentContext.class);
+		public List<ExpressionContext> expression() {
+			return getRuleContexts(ExpressionContext.class);
 		}
-		public ComponentContext component(int i) {
-			return getRuleContext(ComponentContext.class,i);
+		public ExpressionContext expression(int i) {
+			return getRuleContext(ExpressionContext.class,i);
 		}
 		public Adder_assignContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -533,14 +551,114 @@ public class FSMParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(87);
+			setState(93);
 			match(ASSIGN);
-			setState(88);
-			component();
-			setState(89);
+			setState(94);
+			expression();
+			setState(95);
 			match(T__6);
-			setState(90);
-			component();
+			setState(96);
+			expression();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class And_assigmentContext extends ParserRuleContext {
+		public TerminalNode ASSIGN() { return getToken(FSMParser.ASSIGN, 0); }
+		public List<ExpressionContext> expression() {
+			return getRuleContexts(ExpressionContext.class);
+		}
+		public ExpressionContext expression(int i) {
+			return getRuleContext(ExpressionContext.class,i);
+		}
+		public TerminalNode AND() { return getToken(FSMParser.AND, 0); }
+		public And_assigmentContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_and_assigment; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FSMListener ) ((FSMListener)listener).enterAnd_assigment(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FSMListener ) ((FSMListener)listener).exitAnd_assigment(this);
+		}
+	}
+
+	public final And_assigmentContext and_assigment() throws RecognitionException {
+		And_assigmentContext _localctx = new And_assigmentContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_and_assigment);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(98);
+			match(ASSIGN);
+			setState(99);
+			expression();
+			setState(100);
+			match(AND);
+			setState(101);
+			expression();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Or_assigmentContext extends ParserRuleContext {
+		public TerminalNode ASSIGN() { return getToken(FSMParser.ASSIGN, 0); }
+		public List<ExpressionContext> expression() {
+			return getRuleContexts(ExpressionContext.class);
+		}
+		public ExpressionContext expression(int i) {
+			return getRuleContext(ExpressionContext.class,i);
+		}
+		public TerminalNode OR() { return getToken(FSMParser.OR, 0); }
+		public Or_assigmentContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_or_assigment; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FSMListener ) ((FSMListener)listener).enterOr_assigment(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FSMListener ) ((FSMListener)listener).exitOr_assigment(this);
+		}
+	}
+
+	public final Or_assigmentContext or_assigment() throws RecognitionException {
+		Or_assigmentContext _localctx = new Or_assigmentContext(_ctx, getState());
+		enterRule(_localctx, 14, RULE_or_assigment);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(103);
+			match(ASSIGN);
+			setState(104);
+			expression();
+			setState(105);
+			match(OR);
+			setState(106);
+			expression();
 			}
 		}
 		catch (RecognitionException re) {
@@ -574,12 +692,12 @@ public class FSMParser extends Parser {
 
 	public final IntegerContext integer() throws RecognitionException {
 		IntegerContext _localctx = new IntegerContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_integer);
+		enterRule(_localctx, 16, RULE_integer);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(92);
+			setState(108);
 			((IntegerContext)_localctx).opp = _input.LT(1);
 			_la = _input.LA(1);
 			if ( !(_la==NEGATIVEINT || _la==INT) ) {
@@ -603,7 +721,7 @@ public class FSMParser extends Parser {
 		return _localctx;
 	}
 
-	public static class ComponentContext extends ParserRuleContext {
+	public static class ExpressionContext extends ParserRuleContext {
 		public IntegerContext integer() {
 			return getRuleContext(IntegerContext.class,0);
 		}
@@ -613,44 +731,44 @@ public class FSMParser extends Parser {
 		public VarContext var() {
 			return getRuleContext(VarContext.class,0);
 		}
-		public ComponentContext(ParserRuleContext parent, int invokingState) {
+		public ExpressionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_component; }
+		@Override public int getRuleIndex() { return RULE_expression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FSMListener ) ((FSMListener)listener).enterComponent(this);
+			if ( listener instanceof FSMListener ) ((FSMListener)listener).enterExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FSMListener ) ((FSMListener)listener).exitComponent(this);
+			if ( listener instanceof FSMListener ) ((FSMListener)listener).exitExpression(this);
 		}
 	}
 
-	public final ComponentContext component() throws RecognitionException {
-		ComponentContext _localctx = new ComponentContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_component);
+	public final ExpressionContext expression() throws RecognitionException {
+		ExpressionContext _localctx = new ExpressionContext(_ctx, getState());
+		enterRule(_localctx, 18, RULE_expression);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(97);
+			setState(113);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 			case 1:
 				{
-				setState(94);
+				setState(110);
 				integer();
 				}
 				break;
 			case 2:
 				{
-				setState(95);
+				setState(111);
 				register();
 				}
 				break;
 			case 3:
 				{
-				setState(96);
+				setState(112);
 				var();
 				}
 				break;
@@ -687,26 +805,26 @@ public class FSMParser extends Parser {
 
 	public final RegisterContext register() throws RecognitionException {
 		RegisterContext _localctx = new RegisterContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_register);
+		enterRule(_localctx, 20, RULE_register);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(101);
+			setState(117);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==T__7) {
 				{
-				setState(99);
+				setState(115);
 				match(T__7);
-				setState(100);
+				setState(116);
 				match(INT);
 				}
 			}
 
-			setState(103);
+			setState(119);
 			match(REG);
-			setState(104);
+			setState(120);
 			match(NAME);
 			}
 		}
@@ -742,46 +860,46 @@ public class FSMParser extends Parser {
 
 	public final VarContext var() throws RecognitionException {
 		VarContext _localctx = new VarContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_var);
+		enterRule(_localctx, 22, RULE_var);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(108);
+			setState(124);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==T__7) {
 				{
-				setState(106);
+				setState(122);
 				match(T__7);
-				setState(107);
+				setState(123);
 				match(INT);
 				}
 			}
 
-			setState(110);
+			setState(126);
 			match(VAR);
-			setState(112);
+			setState(128);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==Clk) {
 				{
-				setState(111);
+				setState(127);
 				match(Clk);
 				}
 			}
 
-			setState(115);
+			setState(131);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==RESET) {
 				{
-				setState(114);
+				setState(130);
 				match(RESET);
 				}
 			}
 
-			setState(117);
+			setState(133);
 			match(NAME);
 			}
 		}
@@ -819,14 +937,14 @@ public class FSMParser extends Parser {
 
 	public final Var_assignContext var_assign() throws RecognitionException {
 		Var_assignContext _localctx = new Var_assignContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_var_assign);
+		enterRule(_localctx, 24, RULE_var_assign);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(119);
+			setState(135);
 			var();
 			{
-			setState(120);
+			setState(136);
 			var_assigment();
 			}
 			}
@@ -863,14 +981,14 @@ public class FSMParser extends Parser {
 
 	public final Var_assigmentContext var_assigment() throws RecognitionException {
 		Var_assigmentContext _localctx = new Var_assigmentContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_var_assigment);
+		enterRule(_localctx, 26, RULE_var_assigment);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(122);
+			setState(138);
 			match(ASSIGN);
 			{
-			setState(123);
+			setState(139);
 			integer();
 			}
 			}
@@ -888,11 +1006,11 @@ public class FSMParser extends Parser {
 
 	public static class Sub_assignmentContext extends ParserRuleContext {
 		public TerminalNode ASSIGN() { return getToken(FSMParser.ASSIGN, 0); }
-		public List<ComponentContext> component() {
-			return getRuleContexts(ComponentContext.class);
+		public List<ExpressionContext> expression() {
+			return getRuleContexts(ExpressionContext.class);
 		}
-		public ComponentContext component(int i) {
-			return getRuleContext(ComponentContext.class,i);
+		public ExpressionContext expression(int i) {
+			return getRuleContext(ExpressionContext.class,i);
 		}
 		public Sub_assignmentContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -910,18 +1028,18 @@ public class FSMParser extends Parser {
 
 	public final Sub_assignmentContext sub_assignment() throws RecognitionException {
 		Sub_assignmentContext _localctx = new Sub_assignmentContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_sub_assignment);
+		enterRule(_localctx, 28, RULE_sub_assignment);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(125);
+			setState(141);
 			match(ASSIGN);
-			setState(126);
-			component();
-			setState(127);
+			setState(142);
+			expression();
+			setState(143);
 			match(T__8);
-			setState(128);
-			component();
+			setState(144);
+			expression();
 			}
 		}
 		catch (RecognitionException re) {
@@ -937,11 +1055,11 @@ public class FSMParser extends Parser {
 
 	public static class Mult_assigmentContext extends ParserRuleContext {
 		public TerminalNode ASSIGN() { return getToken(FSMParser.ASSIGN, 0); }
-		public List<ComponentContext> component() {
-			return getRuleContexts(ComponentContext.class);
+		public List<ExpressionContext> expression() {
+			return getRuleContexts(ExpressionContext.class);
 		}
-		public ComponentContext component(int i) {
-			return getRuleContext(ComponentContext.class,i);
+		public ExpressionContext expression(int i) {
+			return getRuleContext(ExpressionContext.class,i);
 		}
 		public Mult_assigmentContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -959,18 +1077,18 @@ public class FSMParser extends Parser {
 
 	public final Mult_assigmentContext mult_assigment() throws RecognitionException {
 		Mult_assigmentContext _localctx = new Mult_assigmentContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_mult_assigment);
+		enterRule(_localctx, 30, RULE_mult_assigment);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(130);
+			setState(146);
 			match(ASSIGN);
-			setState(131);
-			component();
-			setState(132);
+			setState(147);
+			expression();
+			setState(148);
 			match(T__9);
-			setState(133);
-			component();
+			setState(149);
+			expression();
 			}
 		}
 		catch (RecognitionException re) {
@@ -986,11 +1104,11 @@ public class FSMParser extends Parser {
 
 	public static class Div_assigmentContext extends ParserRuleContext {
 		public TerminalNode ASSIGN() { return getToken(FSMParser.ASSIGN, 0); }
-		public List<ComponentContext> component() {
-			return getRuleContexts(ComponentContext.class);
+		public List<ExpressionContext> expression() {
+			return getRuleContexts(ExpressionContext.class);
 		}
-		public ComponentContext component(int i) {
-			return getRuleContext(ComponentContext.class,i);
+		public ExpressionContext expression(int i) {
+			return getRuleContext(ExpressionContext.class,i);
 		}
 		public Div_assigmentContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1008,18 +1126,18 @@ public class FSMParser extends Parser {
 
 	public final Div_assigmentContext div_assigment() throws RecognitionException {
 		Div_assigmentContext _localctx = new Div_assigmentContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_div_assigment);
+		enterRule(_localctx, 32, RULE_div_assigment);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(135);
+			setState(151);
 			match(ASSIGN);
-			setState(136);
-			component();
-			setState(137);
+			setState(152);
+			expression();
+			setState(153);
 			match(T__10);
-			setState(138);
-			component();
+			setState(154);
+			expression();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1035,14 +1153,8 @@ public class FSMParser extends Parser {
 
 	public static class Reg_assigmentContext extends ParserRuleContext {
 		public TerminalNode ASSIGN() { return getToken(FSMParser.ASSIGN, 0); }
-		public IntegerContext integer() {
-			return getRuleContext(IntegerContext.class,0);
-		}
-		public RegisterContext register() {
-			return getRuleContext(RegisterContext.class,0);
-		}
-		public VarContext var() {
-			return getRuleContext(VarContext.class,0);
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
 		}
 		public Reg_assigmentContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1060,34 +1172,14 @@ public class FSMParser extends Parser {
 
 	public final Reg_assigmentContext reg_assigment() throws RecognitionException {
 		Reg_assigmentContext _localctx = new Reg_assigmentContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_reg_assigment);
+		enterRule(_localctx, 34, RULE_reg_assigment);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(140);
+			setState(156);
 			match(ASSIGN);
-			setState(144);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
-			case 1:
-				{
-				setState(141);
-				integer();
-				}
-				break;
-			case 2:
-				{
-				setState(142);
-				register();
-				}
-				break;
-			case 3:
-				{
-				setState(143);
-				var();
-				}
-				break;
-			}
+			setState(157);
+			expression();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1131,36 +1223,36 @@ public class FSMParser extends Parser {
 
 	public final InputsContext inputs() throws RecognitionException {
 		InputsContext _localctx = new InputsContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_inputs);
+		enterRule(_localctx, 36, RULE_inputs);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(146);
+			setState(159);
 			match(INPUT);
-			setState(151);
+			setState(164);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__7) | (1L << REG) | (1L << VAR))) != 0)) {
 				{
-				setState(149);
+				setState(162);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
+				switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
 				case 1:
 					{
-					setState(147);
+					setState(160);
 					register();
 					}
 					break;
 				case 2:
 					{
-					setState(148);
+					setState(161);
 					var();
 					}
 					break;
 				}
 				}
-				setState(153);
+				setState(166);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -1207,36 +1299,36 @@ public class FSMParser extends Parser {
 
 	public final OutputsContext outputs() throws RecognitionException {
 		OutputsContext _localctx = new OutputsContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_outputs);
+		enterRule(_localctx, 38, RULE_outputs);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(154);
+			setState(167);
 			match(OUTPUT);
-			setState(159);
+			setState(172);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__7) | (1L << REG) | (1L << VAR))) != 0)) {
 				{
-				setState(157);
+				setState(170);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,15,_ctx) ) {
+				switch ( getInterpreter().adaptivePredict(_input,14,_ctx) ) {
 				case 1:
 					{
-					setState(155);
+					setState(168);
 					register();
 					}
 					break;
 				case 2:
 					{
-					setState(156);
+					setState(169);
 					var();
 					}
 					break;
 				}
 				}
-				setState(161);
+				setState(174);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -1254,52 +1346,57 @@ public class FSMParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\37\u00a5\4\2\t\2"+
-		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
-		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
-		"\4\23\t\23\3\2\3\2\3\2\3\2\6\2+\n\2\r\2\16\2,\3\2\3\2\3\2\3\3\3\3\5\3"+
-		"\64\n\3\3\3\3\3\3\4\3\4\3\4\5\4;\n\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\7"+
-		"\5E\n\5\f\5\16\5H\13\5\3\5\7\5K\n\5\f\5\16\5N\13\5\3\5\3\5\3\6\3\6\3\6"+
-		"\3\6\3\6\3\6\5\6X\n\6\3\7\3\7\3\7\3\7\3\7\3\b\3\b\3\t\3\t\3\t\5\td\n\t"+
-		"\3\n\3\n\5\nh\n\n\3\n\3\n\3\n\3\13\3\13\5\13o\n\13\3\13\3\13\5\13s\n\13"+
-		"\3\13\5\13v\n\13\3\13\3\13\3\f\3\f\3\f\3\r\3\r\3\r\3\16\3\16\3\16\3\16"+
-		"\3\16\3\17\3\17\3\17\3\17\3\17\3\20\3\20\3\20\3\20\3\20\3\21\3\21\3\21"+
-		"\3\21\5\21\u0093\n\21\3\22\3\22\3\22\7\22\u0098\n\22\f\22\16\22\u009b"+
-		"\13\22\3\23\3\23\3\23\7\23\u00a0\n\23\f\23\16\23\u00a3\13\23\3\23\2\2"+
-		"\24\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$\2\4\3\2\20\23\3\2\34\35"+
-		"\2\u00a9\2&\3\2\2\2\4\61\3\2\2\2\6\67\3\2\2\2\b?\3\2\2\2\nQ\3\2\2\2\f"+
-		"Y\3\2\2\2\16^\3\2\2\2\20c\3\2\2\2\22g\3\2\2\2\24n\3\2\2\2\26y\3\2\2\2"+
-		"\30|\3\2\2\2\32\177\3\2\2\2\34\u0084\3\2\2\2\36\u0089\3\2\2\2 \u008e\3"+
-		"\2\2\2\"\u0094\3\2\2\2$\u009c\3\2\2\2&\'\7\3\2\2\'(\5\"\22\2(*\5$\23\2"+
-		")+\5\b\5\2*)\3\2\2\2+,\3\2\2\2,*\3\2\2\2,-\3\2\2\2-.\3\2\2\2./\7\4\2\2"+
-		"/\60\7\2\2\3\60\3\3\2\2\2\61\63\7\5\2\2\62\64\5\6\4\2\63\62\3\2\2\2\63"+
-		"\64\3\2\2\2\64\65\3\2\2\2\65\66\7\33\2\2\66\5\3\2\2\2\67:\7\6\2\28;\5"+
-		"\22\n\29;\5\24\13\2:8\3\2\2\2:9\3\2\2\2;<\3\2\2\2<=\t\2\2\2=>\5\20\t\2"+
-		">\7\3\2\2\2?@\7\33\2\2@F\7\7\2\2AE\5\n\6\2BE\5\f\7\2CE\5\26\f\2DA\3\2"+
-		"\2\2DB\3\2\2\2DC\3\2\2\2EH\3\2\2\2FD\3\2\2\2FG\3\2\2\2GL\3\2\2\2HF\3\2"+
-		"\2\2IK\5\4\3\2JI\3\2\2\2KN\3\2\2\2LJ\3\2\2\2LM\3\2\2\2MO\3\2\2\2NL\3\2"+
-		"\2\2OP\7\b\2\2P\t\3\2\2\2QW\5\22\n\2RX\5 \21\2SX\5\f\7\2TX\5\32\16\2U"+
-		"X\5\34\17\2VX\5\36\20\2WR\3\2\2\2WS\3\2\2\2WT\3\2\2\2WU\3\2\2\2WV\3\2"+
-		"\2\2X\13\3\2\2\2YZ\7\26\2\2Z[\5\20\t\2[\\\7\t\2\2\\]\5\20\t\2]\r\3\2\2"+
-		"\2^_\t\3\2\2_\17\3\2\2\2`d\5\16\b\2ad\5\22\n\2bd\5\24\13\2c`\3\2\2\2c"+
-		"a\3\2\2\2cb\3\2\2\2d\21\3\2\2\2ef\7\n\2\2fh\7\35\2\2ge\3\2\2\2gh\3\2\2"+
-		"\2hi\3\2\2\2ij\7\30\2\2jk\7\32\2\2k\23\3\2\2\2lm\7\n\2\2mo\7\35\2\2nl"+
-		"\3\2\2\2no\3\2\2\2op\3\2\2\2pr\7\31\2\2qs\7\16\2\2rq\3\2\2\2rs\3\2\2\2"+
-		"su\3\2\2\2tv\7\17\2\2ut\3\2\2\2uv\3\2\2\2vw\3\2\2\2wx\7\32\2\2x\25\3\2"+
-		"\2\2yz\5\24\13\2z{\5\30\r\2{\27\3\2\2\2|}\7\26\2\2}~\5\16\b\2~\31\3\2"+
-		"\2\2\177\u0080\7\26\2\2\u0080\u0081\5\20\t\2\u0081\u0082\7\13\2\2\u0082"+
-		"\u0083\5\20\t\2\u0083\33\3\2\2\2\u0084\u0085\7\26\2\2\u0085\u0086\5\20"+
-		"\t\2\u0086\u0087\7\f\2\2\u0087\u0088\5\20\t\2\u0088\35\3\2\2\2\u0089\u008a"+
-		"\7\26\2\2\u008a\u008b\5\20\t\2\u008b\u008c\7\r\2\2\u008c\u008d\5\20\t"+
-		"\2\u008d\37\3\2\2\2\u008e\u0092\7\26\2\2\u008f\u0093\5\16\b\2\u0090\u0093"+
-		"\5\22\n\2\u0091\u0093\5\24\13\2\u0092\u008f\3\2\2\2\u0092\u0090\3\2\2"+
-		"\2\u0092\u0091\3\2\2\2\u0093!\3\2\2\2\u0094\u0099\7\24\2\2\u0095\u0098"+
-		"\5\22\n\2\u0096\u0098\5\24\13\2\u0097\u0095\3\2\2\2\u0097\u0096\3\2\2"+
-		"\2\u0098\u009b\3\2\2\2\u0099\u0097\3\2\2\2\u0099\u009a\3\2\2\2\u009a#"+
-		"\3\2\2\2\u009b\u0099\3\2\2\2\u009c\u00a1\7\25\2\2\u009d\u00a0\5\22\n\2"+
-		"\u009e\u00a0\5\24\13\2\u009f\u009d\3\2\2\2\u009f\u009e\3\2\2\2\u00a0\u00a3"+
-		"\3\2\2\2\u00a1\u009f\3\2\2\2\u00a1\u00a2\3\2\2\2\u00a2%\3\2\2\2\u00a3"+
-		"\u00a1\3\2\2\2\23,\63:DFLWcgnru\u0092\u0097\u0099\u009f\u00a1";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3!\u00b2\4\2\t\2\4"+
+		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
+		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
+		"\4\23\t\23\4\24\t\24\4\25\t\25\3\2\3\2\3\2\3\2\6\2/\n\2\r\2\16\2\60\3"+
+		"\2\3\2\3\2\3\3\3\3\5\38\n\3\3\3\3\3\3\4\3\4\3\4\5\4?\n\4\3\4\3\4\3\4\3"+
+		"\5\3\5\3\5\3\5\3\5\7\5I\n\5\f\5\16\5L\13\5\3\5\7\5O\n\5\f\5\16\5R\13\5"+
+		"\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6^\n\6\3\7\3\7\3\7\3\7\3\7"+
+		"\3\b\3\b\3\b\3\b\3\b\3\t\3\t\3\t\3\t\3\t\3\n\3\n\3\13\3\13\3\13\5\13t"+
+		"\n\13\3\f\3\f\5\fx\n\f\3\f\3\f\3\f\3\r\3\r\5\r\177\n\r\3\r\3\r\5\r\u0083"+
+		"\n\r\3\r\5\r\u0086\n\r\3\r\3\r\3\16\3\16\3\16\3\17\3\17\3\17\3\20\3\20"+
+		"\3\20\3\20\3\20\3\21\3\21\3\21\3\21\3\21\3\22\3\22\3\22\3\22\3\22\3\23"+
+		"\3\23\3\23\3\24\3\24\3\24\7\24\u00a5\n\24\f\24\16\24\u00a8\13\24\3\25"+
+		"\3\25\3\25\7\25\u00ad\n\25\f\25\16\25\u00b0\13\25\3\25\2\2\26\2\4\6\b"+
+		"\n\f\16\20\22\24\26\30\32\34\36 \"$&(\2\4\3\2\22\25\3\2\36\37\2\u00b4"+
+		"\2*\3\2\2\2\4\65\3\2\2\2\6;\3\2\2\2\bC\3\2\2\2\nU\3\2\2\2\f_\3\2\2\2\16"+
+		"d\3\2\2\2\20i\3\2\2\2\22n\3\2\2\2\24s\3\2\2\2\26w\3\2\2\2\30~\3\2\2\2"+
+		"\32\u0089\3\2\2\2\34\u008c\3\2\2\2\36\u008f\3\2\2\2 \u0094\3\2\2\2\"\u0099"+
+		"\3\2\2\2$\u009e\3\2\2\2&\u00a1\3\2\2\2(\u00a9\3\2\2\2*+\7\3\2\2+,\5&\24"+
+		"\2,.\5(\25\2-/\5\b\5\2.-\3\2\2\2/\60\3\2\2\2\60.\3\2\2\2\60\61\3\2\2\2"+
+		"\61\62\3\2\2\2\62\63\7\4\2\2\63\64\7\2\2\3\64\3\3\2\2\2\65\67\7\5\2\2"+
+		"\668\5\6\4\2\67\66\3\2\2\2\678\3\2\2\289\3\2\2\29:\7\35\2\2:\5\3\2\2\2"+
+		";>\7\6\2\2<?\5\26\f\2=?\5\30\r\2><\3\2\2\2>=\3\2\2\2?@\3\2\2\2@A\t\2\2"+
+		"\2AB\5\24\13\2B\7\3\2\2\2CD\7\35\2\2DJ\7\7\2\2EI\5\n\6\2FI\5\f\7\2GI\5"+
+		"\32\16\2HE\3\2\2\2HF\3\2\2\2HG\3\2\2\2IL\3\2\2\2JH\3\2\2\2JK\3\2\2\2K"+
+		"P\3\2\2\2LJ\3\2\2\2MO\5\4\3\2NM\3\2\2\2OR\3\2\2\2PN\3\2\2\2PQ\3\2\2\2"+
+		"QS\3\2\2\2RP\3\2\2\2ST\7\b\2\2T\t\3\2\2\2U]\5\26\f\2V^\5$\23\2W^\5\f\7"+
+		"\2X^\5\36\20\2Y^\5 \21\2Z^\5\"\22\2[^\5\16\b\2\\^\5\20\t\2]V\3\2\2\2]"+
+		"W\3\2\2\2]X\3\2\2\2]Y\3\2\2\2]Z\3\2\2\2][\3\2\2\2]\\\3\2\2\2^\13\3\2\2"+
+		"\2_`\7\30\2\2`a\5\24\13\2ab\7\t\2\2bc\5\24\13\2c\r\3\2\2\2de\7\30\2\2"+
+		"ef\5\24\13\2fg\7\16\2\2gh\5\24\13\2h\17\3\2\2\2ij\7\30\2\2jk\5\24\13\2"+
+		"kl\7\17\2\2lm\5\24\13\2m\21\3\2\2\2no\t\3\2\2o\23\3\2\2\2pt\5\22\n\2q"+
+		"t\5\26\f\2rt\5\30\r\2sp\3\2\2\2sq\3\2\2\2sr\3\2\2\2t\25\3\2\2\2uv\7\n"+
+		"\2\2vx\7\37\2\2wu\3\2\2\2wx\3\2\2\2xy\3\2\2\2yz\7\32\2\2z{\7\34\2\2{\27"+
+		"\3\2\2\2|}\7\n\2\2}\177\7\37\2\2~|\3\2\2\2~\177\3\2\2\2\177\u0080\3\2"+
+		"\2\2\u0080\u0082\7\33\2\2\u0081\u0083\7\20\2\2\u0082\u0081\3\2\2\2\u0082"+
+		"\u0083\3\2\2\2\u0083\u0085\3\2\2\2\u0084\u0086\7\21\2\2\u0085\u0084\3"+
+		"\2\2\2\u0085\u0086\3\2\2\2\u0086\u0087\3\2\2\2\u0087\u0088\7\34\2\2\u0088"+
+		"\31\3\2\2\2\u0089\u008a\5\30\r\2\u008a\u008b\5\34\17\2\u008b\33\3\2\2"+
+		"\2\u008c\u008d\7\30\2\2\u008d\u008e\5\22\n\2\u008e\35\3\2\2\2\u008f\u0090"+
+		"\7\30\2\2\u0090\u0091\5\24\13\2\u0091\u0092\7\13\2\2\u0092\u0093\5\24"+
+		"\13\2\u0093\37\3\2\2\2\u0094\u0095\7\30\2\2\u0095\u0096\5\24\13\2\u0096"+
+		"\u0097\7\f\2\2\u0097\u0098\5\24\13\2\u0098!\3\2\2\2\u0099\u009a\7\30\2"+
+		"\2\u009a\u009b\5\24\13\2\u009b\u009c\7\r\2\2\u009c\u009d\5\24\13\2\u009d"+
+		"#\3\2\2\2\u009e\u009f\7\30\2\2\u009f\u00a0\5\24\13\2\u00a0%\3\2\2\2\u00a1"+
+		"\u00a6\7\26\2\2\u00a2\u00a5\5\26\f\2\u00a3\u00a5\5\30\r\2\u00a4\u00a2"+
+		"\3\2\2\2\u00a4\u00a3\3\2\2\2\u00a5\u00a8\3\2\2\2\u00a6\u00a4\3\2\2\2\u00a6"+
+		"\u00a7\3\2\2\2\u00a7\'\3\2\2\2\u00a8\u00a6\3\2\2\2\u00a9\u00ae\7\27\2"+
+		"\2\u00aa\u00ad\5\26\f\2\u00ab\u00ad\5\30\r\2\u00ac\u00aa\3\2\2\2\u00ac"+
+		"\u00ab\3\2\2\2\u00ad\u00b0\3\2\2\2\u00ae\u00ac\3\2\2\2\u00ae\u00af\3\2"+
+		"\2\2\u00af)\3\2\2\2\u00b0\u00ae\3\2\2\2\22\60\67>HJP]sw~\u0082\u0085\u00a4"+
+		"\u00a6\u00ac\u00ae";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

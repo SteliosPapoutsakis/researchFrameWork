@@ -13,9 +13,13 @@ state: STATENUMBER 'Define' ((register_assign)
  | var_assign)* next_state* 'End'
  ;
 
-register_assign: register (reg_assigment|adder_assign|sub_assignment|mult_assigment|div_assigment);
+register_assign: register (reg_assigment|adder_assign|sub_assignment|mult_assigment|div_assigment|and_assigment|or_assigment);
 
 adder_assign: ASSIGN  expression '+' expression;
+
+and_assigment: ASSIGN expression AND expression;
+
+or_assigment: ASSIGN expression OR expression;
 
 
 integer: opp=(INT|NEGATIVEINT);
@@ -42,6 +46,8 @@ outputs: OUTPUT(register|var)*;
 
 fragment UPPERCASE: ('A'..'Z');
 fragment LOWERCASE: ('a'..'z');
+AND: 'and' | 'And' | '&&';
+OR: 'or' | 'Or' | '||';
 Clk: 'C_';
 RESET: 'R_';
 EQUALS: 'equals';
