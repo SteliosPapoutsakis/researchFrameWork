@@ -50,7 +50,7 @@ AND: 'and' | 'And' | '&&';
 OR: 'or' | 'Or' | '||';
 Clk: 'C_';
 RESET: 'R_';
-EQUALS: 'equals';
+EQUALS: 'equals' | '==';
 GREATERTHAN: 'greater than' | '>';
 LESSTHAN: 'less than' | '<';
 NOT: 'not equals' | '~=';

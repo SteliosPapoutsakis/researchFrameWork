@@ -42,7 +42,6 @@ NEWLINE=31
 '/'=11
 'C_'=14
 'R_'=15
-'equals'=16
 'input'=20
 'output'=21
 ','=23

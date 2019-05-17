@@ -57,6 +57,8 @@ Overriden methods which write verilog code
                 str += comp.getName() + "_quotient";
             else if (comp instanceof Adder)
                 str += comp.getName() + "_sum";
+            else if (comp instanceof And)
+                str += comp.getName() + "_and";
             else
                 str += comp.getName();
             count++;

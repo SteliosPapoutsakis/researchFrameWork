@@ -206,7 +206,7 @@ public class ProgramListener extends FSMBaseListener {
             else if (ctx.expression(0).integer() != null)
                 newAdder.addInput(new FixedNumber(Integer.parseInt(ctx.expression(0).integer().getText()), reg.getBitSize()), 0);
             else if (ctx.expression(0).var() != null)
-                newAdder.addInput(findComp(ctx.expression(0).var().getText()), 0);
+                newAdder.addInput(findComp(ctx.expression(0).var().NAME().getText()), 0);
 
             //finding second input for adder
             if (ctx.expression(1).register() != null)
@@ -214,7 +214,7 @@ public class ProgramListener extends FSMBaseListener {
             else if (ctx.expression(1).integer() != null)
                 newAdder.addInput(new FixedNumber(Integer.parseInt(ctx.expression(1).integer().getText()), reg.getBitSize()), 1);
             else if (ctx.expression(1).var() != null)
-                newAdder.addInput(findComp(ctx.expression(1).var().getText()), 1);
+                newAdder.addInput(findComp(ctx.expression(1).var().NAME().getText()), 1);
 
 
         }
@@ -253,7 +253,7 @@ public class ProgramListener extends FSMBaseListener {
             else if (ctx.expression(0).integer() != null)
                 mult.addInput(new FixedNumber(Integer.parseInt(ctx.expression(0).integer().getText()), reg.getBitSize()), 0);
             else if (ctx.expression(0).var() != null)
-                mult.addInput(findComp(ctx.expression(0).var().getText()), 0);
+                mult.addInput(findComp(ctx.expression(0).var().NAME().getText()), 0);
 
             //finding second input for adder
             if (ctx.expression(1).register() != null)
@@ -261,7 +261,7 @@ public class ProgramListener extends FSMBaseListener {
             else if (ctx.expression(1).integer() != null)
                 mult.addInput(new FixedNumber(Integer.parseInt(ctx.expression(1).integer().getText()), reg.getBitSize()), 1);
             else if (ctx.expression(1).var() != null)
-                mult.addInput(findComp(ctx.expression(1).var().getText()), 1);
+                mult.addInput(findComp(ctx.expression(1).var().NAME().getText()), 1);
 
 
         }
@@ -299,7 +299,7 @@ public class ProgramListener extends FSMBaseListener {
             else if (ctx.expression(0).integer() != null)
                 div.addInput(new FixedNumber(Integer.parseInt(ctx.expression(0).integer().getText()), reg.getBitSize()), 0);
             else if (ctx.expression(0).var() != null)
-                div.addInput(findComp(ctx.expression(0).var().getText()), 0);
+                div.addInput(findComp(ctx.expression(0).var().NAME().getText()), 0);
 
             //finding second input for adder
             if (ctx.expression(1).register() != null)
@@ -307,7 +307,7 @@ public class ProgramListener extends FSMBaseListener {
             else if (ctx.expression(1).integer() != null)
                 div.addInput(new FixedNumber(Integer.parseInt(ctx.expression(1).integer().getText()), reg.getBitSize()), 1);
             else if (ctx.expression(1).var() != null)
-                div.addInput(findComp(ctx.expression(1).var().getText()), 1);
+                div.addInput(findComp(ctx.expression(1).var().NAME().getText()), 1);
 
 
         }
@@ -347,7 +347,7 @@ public class ProgramListener extends FSMBaseListener {
             else if (ctx.expression(0).integer() != null)
                 newSub.addInput(new FixedNumber(Integer.parseInt(ctx.expression(0).integer().getText()), reg.getBitSize()), 0);
             else if (ctx.expression(0).var() != null)
-                newSub.addInput(findComp(ctx.expression(0).var().getText()), 0);
+                newSub.addInput(findComp(ctx.expression(0).var().NAME().getText()), 0);
 
             //finding second input for adder
             if (ctx.expression(1).register() != null)
@@ -355,7 +355,7 @@ public class ProgramListener extends FSMBaseListener {
             else if (ctx.expression(1).integer() != null)
                 newSub.addInput(new FixedNumber(Integer.parseInt(ctx.expression(1).integer().getText()), reg.getBitSize()), 1);
             else if (ctx.expression(1).var() != null)
-                newSub.addInput(findComp(ctx.expression(1).var().getText()), 1);
+                newSub.addInput(findComp(ctx.expression(1).var().NAME().getText()), 1);
 
 
         }
@@ -420,7 +420,7 @@ public class ProgramListener extends FSMBaseListener {
             else if (ctx.expression(0).integer() != null)
                 newand.addInput(new FixedNumber(Integer.parseInt(ctx.expression(0).integer().getText()), reg.getBitSize()), 0);
             else if (ctx.expression(0).var() != null)
-                newand.addInput(findComp(ctx.expression(0).var().getText()), 0);
+                newand.addInput(findComp(ctx.expression(0).var().NAME().getText()), 0);
 
             //finding second input for adder
             if (ctx.expression(1).register() != null)
@@ -428,7 +428,7 @@ public class ProgramListener extends FSMBaseListener {
             else if (ctx.expression(1).integer() != null)
                 newand.addInput(new FixedNumber(Integer.parseInt(ctx.expression(1).integer().getText()), reg.getBitSize()), 1);
             else if (ctx.expression(1).var() != null)
-                newand.addInput(findComp(ctx.expression(1).var().getText()), 1);
+                newand.addInput(findComp(ctx.expression(1).var().NAME().getText()), 1);
 
 
         }
@@ -438,6 +438,10 @@ public class ProgramListener extends FSMBaseListener {
 
     @Override
     public void enterCondition(FSMParser.ConditionContext ctx) {
+        //** patching the issue that next state tranisitons dont happen in the order specified **//
+
+
+
         //if one of the flags is based on a input
         if (ctx.var() != null && ((Var) findComp(ctx.var().NAME().getText())).isInput() &&
                 ((Var) findComp(ctx.var().NAME().getText())).getBitSize() < 2) {
@@ -458,8 +462,8 @@ public class ProgramListener extends FSMBaseListener {
 
         }
         //finding the 2 components that are compaired
-        VerilogComp compare1 = null;
-        VerilogComp compare2 = null;
+        VerilogComp compare1;
+        VerilogComp compare2;
         if (ctx.register() != null) {
             compare1 = findComp(ctx.register().NAME().getText());
 
@@ -689,7 +693,7 @@ public class ProgramListener extends FSMBaseListener {
              * PRINTING DATA PATH
              */
             PrintWriter data = new PrintWriter("./" + this.programName + "_Generate/" + this.programName + "_DataPath.v");
-            data.print("module " + this.programName + "_DataPath(" + dataPath.get(1) + dataPath.get(0) +
+            data.print("module " + this.programName + "_DataPath(" + dataPath.get(0) + dataPath.get(1) +
                     VerilogComp.getClkName() + "," + VerilogComp.getResetName() + ");\n");
             data.print("\n\n" + dataPath.get(3).toString() + "\n\n" + dataPath.get(2).toString() + "input " + VerilogComp.getClkName()
                     + "," + VerilogComp.getResetName() + ";\n\n" +
@@ -705,7 +709,7 @@ public class ProgramListener extends FSMBaseListener {
              * PRINTING CONTROLLER
              */
             PrintWriter con = new PrintWriter("./" + this.programName + "_Generate/" + this.programName + "_ConPath.v");
-            con.print("module " + this.programName + "_Controller(" + conPath.get(1) + conPath.get(0) +
+            con.print("module " + this.programName + "_Controller(" + conPath.get(0) + conPath.get(1) +
                     VerilogComp.getClkName() + "," + VerilogComp.getResetName() + ");\n");
             con.print("\n\n" + conPath.get(3).toString() + "\n\n" + conPath.get(2).toString() + "input clk,reset;\n");
             int size = IntToBinary.strickBinary(this.states.size() - 1).length();
@@ -746,9 +750,9 @@ public class ProgramListener extends FSMBaseListener {
             full.print("module " + this.programName + "_Full(" + module.get(0) + module.get(1) + VerilogComp.getClkName() +
                     "," + VerilogComp.getResetName() + ");\n");
             full.append(module.get(3) + "\n" + module.get(2) + "input clk,reset;\n\n");
-            full.append(this.programName + "_DataPath Data(" + dataPath.get(1) + dataPath.get(0) +
+            full.append(this.programName + "_DataPath Data(" + dataPath.get(0) + dataPath.get(1) +
                     VerilogComp.getClkName() + "," + VerilogComp.getResetName() + ");\n");
-            full.append(this.programName + "_Controller controller(" + conPath.get(1) + conPath.get(0) +
+            full.append(this.programName + "_Controller controller(" + conPath.get(0) + conPath.get(1) +
                     VerilogComp.getClkName() + "," + VerilogComp.getResetName() + ");\n");
             full.append("\n" + "endmodule");
             full.close();
@@ -833,7 +837,7 @@ public class ProgramListener extends FSMBaseListener {
                     "always @ (*) begin\n" +
                     "quotient <= a / b;\n" +
                     "end\n" +
-                    "endmodule");
+                    "endmodule\n");
 
             adder.print("module And(c,a,b);\n" +
                     "parameter SIZE = 8;\n" +
@@ -965,24 +969,22 @@ public class ProgramListener extends FSMBaseListener {
                 conPath.get(2).append(var.defineInput());
                 module.get(2).append("wire " + var.sizeDef() + var.getName() + ";\n");
             } else if (var.isInput()) {
+                //EDIT this is where I made the fix to allow multi condition branching
                 if (var.getBitSize() < 2) {
-                    boolean isData = true;
                     for (VerilogComp comp2 : this.comps) {
-                        if (comp2 instanceof Register && !this.regInputs.get(comp2).contains(var)) {
-                            conPath.get(0).append(var.getName() + ",");
-                            conPath.get(2).append(var.defineInput());
-                            isData = false;
+                        if (comp2 instanceof Register) {
+                            for(VerilogComp comp3: this.regInputs.get(comp2)) {
+                                if (comp3 instanceof And && ((And)(comp3)).isAndInput(var)) {
+
+                                    dataPath.get(1).append((var.getName() + ","));
+                                    dataPath.get(2).append(var.defineInput());
+                                }
+                            }
+
                         }
-
                     }
-                    if (isData) {
-                        dataPath.get(1).append((var.getName() + ","));
-                        dataPath.get(2).append(var.defineInput());
-                    }
-
-                } else {
-                    dataPath.get(1).append((var.getName() + ","));
-                    dataPath.get(2).append(var.defineInput());
+                    conPath.get(0).append(var.getName() + ",");
+                    conPath.get(2).append(var.defineInput());
                 }
                 module.get(1).append(var.getName() + ",");
                 module.get(2).append("input wire " + var.sizeDef() + var.getName() + ";\n");

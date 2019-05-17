@@ -21,7 +21,7 @@ package Framework;
 
         @Override
         public String defineComp() {
-            return "And #(.SIZE(" + this.getBitSize() + "))" + " " + this.getName() + "( " + this.getName() + "_sum," + this.inputs[0].getName() + ", "
+            return "And#(.SIZE(" + this.getBitSize() + "))" + " " + this.getName() + "( " + this.getName() + "_and," + this.inputs[0].getName() + ", "
                     + this.inputs[1].getName() + ");\n";
 
         }
@@ -34,6 +34,13 @@ package Framework;
 
         public VerilogComp[] getInputs() {
             return inputs;
+        }
+
+        public boolean isAndInput(VerilogComp comp)
+        {
+            for(VerilogComp comp2:this.getInputs())
+                if(comp2==comp) return true;
+            return false;
         }
 
 

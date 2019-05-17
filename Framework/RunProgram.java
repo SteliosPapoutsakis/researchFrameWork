@@ -11,33 +11,34 @@ import java.nio.file.Paths;
 
 public class RunProgram {
     public static void main(String[] args) {
-        String fileName = "FIBFINAL";
+        String fileName = "StelliTest";
         String file ="Start FSM\n" +
-                "input Size 5 Var N \n" +
+                "input Size 5 Var N Size 1 Var Start Size 1 Var Start2\n" +
                 "output Size 5 Reg R0\n" +
                 "State:0 Define\n" +
-                "Reg R0 = 1\n" +
+                "Size 1 Reg temp = Var Start && Var Start2\n" +
+                "Reg R0 = 0\n" +
                 "Size 5 Reg A = Var N\n" +
-                "Size 5 Reg R1 = 0\n" +
                 "Next State State:1 \n" +
                 "End\n" +
                 "State:1 Define\n" +
-                "Reg R0 = Reg R0\n" +
-                "Reg A = Reg A\n" +
-                "Reg R1 = Reg R1\n" +
+                "Reg R0 = 1\n" +
+                "Reg A = Var N\n" +
+                "Reg temp = Reg temp\n" +
+                "Next State if Reg temp equals 0 State:0\n" +
                 "Next State if Reg A ~= 0 State:2\n" +
                 "Next State State:3 \n" +
                 "End\n" +
                 "State:2 Define\n" +
-                "Reg R0 = Reg R1\n" +
-                "Reg R1 = Reg R1 + Reg R0\n" +
+                "Reg R0 = Reg R0 + Reg A\n" +
                 "Reg A = Reg A - 1\n" +
+                "Reg temp = Reg temp\n" +
                 "Next State State:1\n" +
                 "End\n" +
                 "State:3 Define\n" +
                 "Reg R0 = Reg R0\n" +
-                "Reg R1 = Reg R1\n" +
                 "Reg A = Reg A\n" +
+                "Reg temp = Reg temp\n" +
                 "Next State State:3 \n" +
                 "End\n" +
                 "End FSM\n";
