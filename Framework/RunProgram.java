@@ -26,7 +26,7 @@ public class RunProgram {
                 "Reg A = Var N\n" +
                 "Reg temp = Reg temp\n" +
                 "Next State if Reg temp equals 0 State:0\n" +
-                "Next State if Reg A ~= 0 State:2\n" +
+                "Next State if Reg A ~= 0 State:0\n" +
                 "Next State State:3 \n" +
                 "End\n" +
                 "State:2 Define\n" +

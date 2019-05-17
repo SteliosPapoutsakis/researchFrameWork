@@ -1,4 +1,5 @@
-package Framework;// Generated from C:/research/javalib/FSM/src/Framework\FSM.g4 by ANTLR 4.7
+// Generated from C:/research/javalib/FSM/src/Framework\FSM.g4 by ANTLR 4.7
+package Framework;
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;

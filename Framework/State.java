@@ -23,47 +23,64 @@ public class State {
         this.conditionsFalse = conditionsFalse;
         this.stateNumberBinary = null;
         this.stateNumber = stateNumber;
-        this.conditionsorderl =  conditionsorder;
+        this.conditionsorderl = conditionsorder;
     }
 
 
     public String defState() {
         StringBuilder str = new StringBuilder("\t\t\t" + this.stateNumberBinary + ": begin \n");
-        int i = 0;
-        //for no condition statments
-        String ifNoCOnditionFirst = "";
-        String isElse = "";
         //first go through true conditions
+        HashMap<Integer,String> conditionals = new HashMap<>();
+        ArrayList<Integer> conditionNextState= new ArrayList<>();
+        boolean needTemp=false;
+        String temp = "\t\t\t\telse\n\t\t\t\t\tnext_state <= ";
         for (Var var : this.conditionsorderl) {
-            if(this.conditionsTrue.get(var) == null) continue;
-            if (var.getName().equals("NO_CONDITIONS")) {
-                ifNoCOnditionFirst = "next_state <= "
-                        + IntToBinary.printToBinary(this.conditionsTrue.get(var),this.stateSize) + ";\n";
+            if(var.getName().equals("NO_CONDITIONS")) {
+                needTemp=true;
+                temp+=IntToBinary.printToBinary(this.conditionsTrue.get(var)) + ";";
                 continue;
             }
-            if (i < 1)
-                str.append(defCondition(var, this.conditionsTrue.get(var), true, true));
-            else
-                str.append(defCondition(var, this.conditionsTrue.get(var), false, true));
-            i++;
+            if(conditionsTrue.containsKey(var)&&!conditionals.containsKey(this.conditionsTrue.get(var)))
+            {
+                conditionals.put(this.conditionsTrue.get(var),"If(" + var.getName());
+                conditionNextState.add(this.conditionsTrue.get(var));
+            }
+            else if(conditionsTrue.containsKey(var))
+            {
+                conditionals.put(this.conditionsTrue.get(var),conditionals.get(this.conditionsTrue.get(var))
+                        +" && " +var.getName());
+            }
         }
-
-
         // then go through false conditions
         for (Var var : this.conditionsorderl) {
-            if(this.conditionsFalse.get(var) == null) continue;
-            if (i < 1) {
-                str.append(defCondition(var, this.conditionsFalse.get(var), true, false));
-            } else
-                str.append(defCondition(var, this.conditionsFalse.get(var), false, false));
-            i++;
-        }
-        if (ifNoCOnditionFirst.length() > 0) {
-            if (this.conditionsFalse.keySet().size() > 0 || this.conditionsTrue.keySet().size() > 1) {
-                isElse = "else";
+
+            if(conditionsFalse.containsKey(var)&&!conditionals.containsKey(this.conditionsFalse.get(var)))
+            {
+                conditionals.put(this.conditionsFalse.get(var),"If(!" + var.getName());
+                conditionNextState.add(this.conditionsFalse.get(var));
             }
-            str.append("\t\t\t\t" + isElse + " " + ifNoCOnditionFirst);
+            else if(conditionsFalse.containsKey(var))
+            {
+                conditionals.put(this.conditionsFalse.get(var),conditionals.get(this.conditionsFalse.get(var))
+                        +" && !" +var.getName());
+            }
         }
+
+
+        //puting all the branching statments now
+        for(Integer i:conditionNextState)
+        {
+                str.append("\t\t\t\t" + conditionals.get(i) + ")\n");
+                str.append("\t\t\t\t\t" + "next_state <= " + IntToBinary.printToBinary(i,stateSize) + ";\n");
+
+
+        }
+        if(needTemp)
+        str.append(temp+"\n");
+
+
+
+
 
         // go through variable assignments
         for (Var var : this.assignments.keySet())
@@ -78,23 +95,7 @@ public class State {
     }
 
 
-    public String defCondition(Var var, int state, boolean isFirst, boolean isTrue) {
-        String stateStr = IntToBinary.printToBinary(state, this.stateSize);
-        StringBuilder str = new StringBuilder();
-        String notEquals = "";
-        if (!isTrue)
-            notEquals = "!";
 
-        String elseif = "";
-        if (!isFirst)
-            elseif = "else ";
-        str.append("\t\t\t\t" + elseif + "if(" + notEquals + var.getName() + ")\n");
-        str.append("\t\t\t\t\tbegin\n");
-        str.append("\t\t\t\t\t\tnext_state <= " + stateStr + ";\n");
-        str.append("\t\t\t\t\tend\n");
-        return str.toString();
-
-    }
 
     public String defAssignemts(Var var, int number) {
         return "\t\t\t\t" + var.getName() + var.sizeDef() + " <= " + IntToBinary.printToBinary(number) + ";\n";

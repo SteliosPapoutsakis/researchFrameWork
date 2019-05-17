@@ -438,10 +438,6 @@ public class ProgramListener extends FSMBaseListener {
 
     @Override
     public void enterCondition(FSMParser.ConditionContext ctx) {
-        //** patching the issue that next state tranisitons dont happen in the order specified **//
-
-
-
         //if one of the flags is based on a input
         if (ctx.var() != null && ((Var) findComp(ctx.var().NAME().getText())).isInput() &&
                 ((Var) findComp(ctx.var().NAME().getText())).getBitSize() < 2) {
@@ -508,9 +504,10 @@ public class ProgramListener extends FSMBaseListener {
 
 
             // finding the type of condition based on token Num
-            if (ctx.opp.getType() == 14 || ctx.opp.getType() == 17) {
+            //equals and not equals
+            if (ctx.opp.getType() == 16 || ctx.opp.getType() == 19) {
                 flags[1] = output;
-                if (ctx.opp.getType() == 14) {
+                if (ctx.opp.getType() == 16) {
                     this.conditions.get(0).put(output, nextState);
                     this.conditionsOrder.add(output);
                 }
@@ -518,12 +515,14 @@ public class ProgramListener extends FSMBaseListener {
                     this.conditions.get(1).put(output, nextState);
                     this.conditionsOrder.add(output);
                 }
-            } else if (ctx.opp.getType() == 15) {
+                //greatethan
+            } else if (ctx.opp.getType() == 17) {
                 flags[2] = output;
                 this.conditions.get(0).put(output, nextState);
                 this.conditionsOrder.add(output);
 
-            } else if (ctx.opp.getType() == 16) {
+                //less than
+            } else if (ctx.opp.getType() == 18) {
                 flags[0] = output;
                 this.conditions.get(0).put(output, nextState);
                 this.conditionsOrder.add(output);
