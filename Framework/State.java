@@ -33,16 +33,19 @@ public class State {
         HashMap<Integer,String> conditionals = new HashMap<>();
         ArrayList<Integer> conditionNextState= new ArrayList<>();
         boolean needTemp=false;
-        String temp = "\t\t\t\telse\n\t\t\t\t\tnext_state <= ";
+        boolean needTempelse=false;
+        String elseT="";
+        String temp = "\t\t\t\t\tnext_state <= ";
         for (Var var : this.conditionsorderl) {
             if(var.getName().equals("NO_CONDITIONS")) {
                 needTemp=true;
-                temp+=IntToBinary.printToBinary(this.conditionsTrue.get(var)) + ";";
+                temp+=IntToBinary.printToBinary(this.conditionsTrue.get(var),stateSize) + ";";
                 continue;
             }
             if(conditionsTrue.containsKey(var)&&!conditionals.containsKey(this.conditionsTrue.get(var)))
             {
-                conditionals.put(this.conditionsTrue.get(var),"If(" + var.getName());
+                elseT="\t\t\t\telse\n";
+                conditionals.put(this.conditionsTrue.get(var),"if(" + var.getName());
                 conditionNextState.add(this.conditionsTrue.get(var));
             }
             else if(conditionsTrue.containsKey(var))
@@ -56,7 +59,8 @@ public class State {
 
             if(conditionsFalse.containsKey(var)&&!conditionals.containsKey(this.conditionsFalse.get(var)))
             {
-                conditionals.put(this.conditionsFalse.get(var),"If(!" + var.getName());
+                elseT="\t\t\t\telse\n";
+                conditionals.put(this.conditionsFalse.get(var),"if(!" + var.getName());
                 conditionNextState.add(this.conditionsFalse.get(var));
             }
             else if(conditionsFalse.containsKey(var))
@@ -76,7 +80,7 @@ public class State {
 
         }
         if(needTemp)
-        str.append(temp+"\n");
+        str.append(elseT+temp+"\n");
 
 
 
@@ -108,11 +112,20 @@ public class State {
         for (Mux mux : this.select.keySet()) {
             for (int i = 0; i < mux.getInputs().length; i++) { //getInputs gets the array of mux inputs
                 // if the mux input index matches the supposed assignment for the state
-                System.out.println(mux.getName());
-                if (mux.getInputs()[i].getName().equals(this.select.get(mux).get(this.stateNumber).getName())) {
-                    str.append(IntToBinary.strickBinary(i, mux.getSelectionSize()));
-                    break;
-                }
+                String nameOfinputatIndex = mux.getInputs()[i].getName();
+                String nameofinputforState = this.select.get(mux).get(stateNumber).getName();
+                boolean assigmentsEqual = nameOfinputatIndex.equals(nameofinputforState);
+                System.out.println("This is the assigment for this mux " + mux.getName() + " for this state " +
+                    this.stateNumber + " " + nameofinputforState + "\n" +
+                " this is the assigment at this index " + i + " " + nameOfinputatIndex + " do they equal? \n" +
+                assigmentsEqual);
+                    if(assigmentsEqual) {
+                        System.out.println("They equaled! this is the binary encoding " +
+                                IntToBinary.strickBinary(i, mux.getSelectionSize()));
+                        str.append(IntToBinary.strickBinary(i, mux.getSelectionSize()));
+                        break;
+                    }
+
             }
         }
 
@@ -121,6 +134,8 @@ public class State {
             size--;
             temp += "[" + size + ":0]";
         }
+
+        System.out.println("\n\n encoding for the STATE " + str.toString() + "\n\n");
 
         return "\t\t\t\t" + temp + " <= " + str.length() + "'b" + str.toString() + ";";
 

@@ -850,9 +850,12 @@ public class ProgramListener extends FSMBaseListener {
             adder.close();
 
             PrintWriter file = new PrintWriter("./" + this.programName + "_Generate/" + "DFF.v");
-            file.println("module DFFR(output reg [SIZEFF-1:0] q, input [SIZEFF-1:0] d, input clk , input rst" +
-                    ",input [SIZEFF-1:0] rst_next);");
+            file.println("module DFFR(q,d,clk,rst" +
+                    ",rst_next);");
             file.println("parameter SIZEFF = 8;");
+            file.println("input clk,rst;");
+            file.println("output reg [SIZEFF-1:0] q;");
+            file.println("input [SIZEFF-1:0] d,rst_next;");
             file.println("always @(posedge clk, posedge rst)");
             file.println("begin");
             file.println("if(rst) q <= rst_next;");
@@ -984,6 +987,11 @@ public class ProgramListener extends FSMBaseListener {
                     }
                     conPath.get(0).append(var.getName() + ",");
                     conPath.get(2).append(var.defineInput());
+                }
+                else//else the input is more than one bit, and thus a data path input
+                {
+                    dataPath.get(1).append((var.getName() + ","));
+                    dataPath.get(2).append(var.defineInput());
                 }
                 module.get(1).append(var.getName() + ",");
                 module.get(2).append("input wire " + var.sizeDef() + var.getName() + ";\n");

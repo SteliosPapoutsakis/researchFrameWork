@@ -22,11 +22,11 @@ public class RunProgram {
                 "Next State State:1 \n" +
                 "End\n" +
                 "State:1 Define\n" +
-                "Reg R0 = 1\n" +
-                "Reg A = Var N\n" +
+                "Reg R0 = Reg R0\n" +
+                "Reg A = Reg A\n" +
                 "Reg temp = Reg temp\n" +
                 "Next State if Reg temp equals 0 State:0\n" +
-                "Next State if Reg A ~= 0 State:0\n" +
+                "Next State if Reg A ~= 0 State:2\n" +
                 "Next State State:3 \n" +
                 "End\n" +
                 "State:2 Define\n" +
