@@ -13,35 +13,66 @@ public class RunProgram {
     public static void main(String[] args) {
         String fileName = "StelliTest";
         String file ="Start FSM\n" +
-                "input Size 5 Var N Size 1 Var Start Size 1 Var Start2\n" +
-                "output Size 5 Reg R0\n" +
+                "input Size 1 Var req0 Size 1 Var req1 \n" +
+                "output Size 1 Var grant0 Size 1 Var grant1 \n" +
                 "State:0 Define\n" +
-                "Size 1 Reg temp = Var Start && Var Start2\n" +
-                "Reg R0 = 0\n" +
-                "Size 5 Reg A = Var N\n" +
-                "Next State State:1 \n" +
+                "Var grant1 = 1   \n" +
+                "Var grant0 = 0   \n" +
+                "Next State if Var req0==1 State:1\n" +
+                "Next State if Var req0==0 State:0\n" +
+                "Next State if Var req0==0 State:2\n" +
+                "Next State if Var req1==0 State:0\n" +
+                "Next State if Var req1==1 State:2\n" +
                 "End\n" +
                 "State:1 Define\n" +
-                "Reg R0 = Reg R0\n" +
-                "Reg A = Reg A\n" +
-                "Reg temp = Reg temp\n" +
-                "Next State if Reg temp equals 0 State:0\n" +
-                "Next State if Reg A ~= 0 State:2\n" +
-                "Next State State:3 \n" +
+                "Var grant1 = 0   \n" +
+                "Var grant0 = 1   \n" +
+                "Next State if Var req0==0 State:3\n" +
+                "Next State if Var req0==1 State:1\n" +
                 "End\n" +
                 "State:2 Define\n" +
-                "Reg R0 = Reg R0 + Reg A\n" +
-                "Reg A = Reg A - 1\n" +
-                "Reg temp = Reg temp\n" +
-                "Next State State:1\n" +
+                "Var grant1 = 1   \n" +
+                "Var grant0 = 0\n" +
+                "Next State if Var req1==1 State:2\n" +
+                "Next State if Var req1==0 State:4\n" +
                 "End\n" +
                 "State:3 Define\n" +
-                "Reg R0 = Reg R0\n" +
-                "Reg A = Reg A\n" +
-                "Reg temp = Reg temp\n" +
-                "Next State State:3 \n" +
+                "Var grant1 = 0   \n" +
+                "Var grant0 = 0   \n" +
+                "Next State if Var req0==0 State:3\n" +
+                "Next State if Var req0==0 State:5\n" +
+                "Next State if Var req0==1 State:1\n" +
+                "Next State if Var req0==1 State:2\n" +
+                "Next State if Var req1==1 State:2\n" +
+                "Next State if Var req1==0 State:1\n" +
+                "Next State if Var req1==1 State:5\n" +
+                "Next State if Var req1==0 State:3\n" +
                 "End\n" +
-                "End FSM\n";
+                "State:4 Define\n" +
+                "Var grant1 = 0   \n" +
+                "Var grant0 = 0   \n" +
+                "Next State if Var req0==0 State:4\n" +
+                "Next State if Var req0==0 State:2\n" +
+                "Next State if Var req0==1 State:6\n" +
+                "Next State if Var req0==1 State:1\n" +
+                "Next State if Var req1==1 State:1\n" +
+                "Next State if Var req1==0 State:6\n" +
+                "Next State if Var req1==1 State:2\n" +
+                "Next State if Var req1==0 State:4\n" +
+                "End\n" +
+                "State:5 Define\n" +
+                "Var grant1 = 1   \n" +
+                "Var grant0 = 0   \n" +
+                "Next State if Var req1==0 State:3\n" +
+                "Next State if Var req1==1 State:5\n" +
+                "End\n" +
+                "State:6 Define\n" +
+                "Var grant1 = 0   \n" +
+                "Var grant0 = 1\n" +
+                "Next State if Var req0==0 State:4\n" +
+                "Next State if Var req0==1 State:6\n" +
+                "End\n" +
+                "End FSM";
         FSMLexer lexer = new FSMLexer(CharStreams.fromString(file));
         FSMParser parser = new FSMParser(new CommonTokenStream(lexer));
         ProgramListener listener = new ProgramListener(fileName);

@@ -24,6 +24,7 @@ public class ProgramListener extends FSMBaseListener {
     private HashMap<Var, Integer> assignments = new HashMap<>(); // map of variables and their respective int assignments
     private HashMap<String, Var[]> compInputs = new HashMap<>(); // comparator inputs mapped with their corresponding flag[]
     private ArrayList<Var> conditionsOrder = new ArrayList<>();
+
     //ctor
     public ProgramListener(String fileName) {
         this.programName = fileName;
@@ -51,7 +52,7 @@ public class ProgramListener extends FSMBaseListener {
         String temp = ctx.STATENUMBER().getText();
         int temp2 = Integer.parseInt(temp.substring(6, temp.length())); //starts at 6 to ignore 'State:'
         State state = new State(temp2, new HashMap<>(this.assignments), new HashMap<>(this.conditions.get(0))
-                , new HashMap<>(this.conditions.get(1)),new ArrayList<>(this.conditionsOrder));
+                , new HashMap<>(this.conditions.get(1)), new ArrayList<>(this.conditionsOrder));
         this.states.add(state);
         //clear maps for new state
         this.assignments.clear();
@@ -340,7 +341,6 @@ public class ProgramListener extends FSMBaseListener {
             }
 
 
-
             // finding 1st input for adder
             if (ctx.expression(0).register() != null)
                 newSub.addInput(findComp(ctx.expression(0).register().NAME().getText()), 0);
@@ -382,7 +382,7 @@ public class ProgramListener extends FSMBaseListener {
             } else if (ctx.expression().var() != null) {
                 this.regInputs.get(reg).add(findComp(ctx.expression().var().NAME().getText()));
 
-                }
+            }
 
         }
     }
@@ -411,7 +411,6 @@ public class ProgramListener extends FSMBaseListener {
                 }
                 j++;
             }
-
 
 
             // finding 1st input for adder
@@ -449,10 +448,12 @@ public class ProgramListener extends FSMBaseListener {
             //checking to see if true or false
             if (Integer.parseInt(ctx.expression().integer().opp.getText()) == 1) {
                 this.conditions.get(0).put(inputflag, nextState);
-                this.conditionsOrder.add(inputflag);
+                if (!this.conditionsOrder.contains(inputflag))
+                    this.conditionsOrder.add(inputflag);
             } else if (Integer.parseInt(ctx.expression().integer().opp.getText()) == 0) {
                 this.conditions.get(1).put(inputflag, nextState);
-                this.conditionsOrder.add(inputflag);
+                if (!this.conditionsOrder.contains(inputflag))
+                    this.conditionsOrder.add(inputflag);
             }
             return;
 
@@ -490,7 +491,7 @@ public class ProgramListener extends FSMBaseListener {
                 text = text.substring(0, text.length() - 2) + "14";
                 if (findComp("flag_" + text) != null) {
                     this.conditions.get(1).put((Var) findComp("flag_" + text), nextState);
-                    this.conditionsOrder.add((Var)findComp("flag_" + text));
+                    this.conditionsOrder.add((Var) findComp("flag_" + text));
                     return;
                 }
             }
@@ -509,22 +510,25 @@ public class ProgramListener extends FSMBaseListener {
                 flags[1] = output;
                 if (ctx.opp.getType() == 16) {
                     this.conditions.get(0).put(output, nextState);
+                    if (!this.conditionsOrder.contains(output))
                     this.conditionsOrder.add(output);
-                }
-                else {
+                } else {
                     this.conditions.get(1).put(output, nextState);
+                    if (!this.conditionsOrder.contains(output))
                     this.conditionsOrder.add(output);
                 }
                 //greatethan
             } else if (ctx.opp.getType() == 17) {
                 flags[2] = output;
                 this.conditions.get(0).put(output, nextState);
+                if (!this.conditionsOrder.contains(output))
                 this.conditionsOrder.add(output);
 
                 //less than
             } else if (ctx.opp.getType() == 18) {
                 flags[0] = output;
                 this.conditions.get(0).put(output, nextState);
+                if (!this.conditionsOrder.contains(output))
                 this.conditionsOrder.add(output);
             }
             this.comps.add(output);
@@ -533,18 +537,17 @@ public class ProgramListener extends FSMBaseListener {
             //if equals flag exists but creating a not equals flag
         } else if (!this.conditions.get(0).containsKey(findComp("flag_" + text)) && ctx.opp.getType() == 17) {
             this.conditions.get(1).put((Var) findComp("flag_" + text), nextState);
-            this.conditionsOrder.add((Var)findComp("flag_" + text));
-        }
-
-        else {
+            this.conditionsOrder.add((Var) findComp("flag_" + text));
+        } else {
             Var output = (Var) findComp("flag_" + text);
-            if (ctx.opp.getType() ==17) {
+            if (ctx.opp.getType() == 17) {
                 this.conditions.get(1).put(output, nextState);
+                if (!this.conditionsOrder.contains(output))
                 this.conditionsOrder.add(output);
-            }
-            else if (ctx.opp.getType() == 14 || ctx.opp.getType() == 15
+            } else if (ctx.opp.getType() == 14 || ctx.opp.getType() == 15
                     || ctx.opp.getType() == 16) {
                 this.conditions.get(0).put(output, nextState);
+                if (!this.conditionsOrder.contains(output))
                 this.conditionsOrder.add(output);
             }
         }
@@ -607,8 +610,11 @@ public class ProgramListener extends FSMBaseListener {
             this.comps.add(mux);
             size += mux.getSelectionSize();
         }
-        Var var = new Var("SelectionBits", size, true, false, true);
-        this.comps.add(var);
+        VerilogComp var = null;
+        if (size > 0) {
+            var = new Var("SelectionBits", size, true, false, true);
+            this.comps.add(var);
+        }
 
 
 // for every state add the size and muxIn
@@ -625,8 +631,9 @@ public class ProgramListener extends FSMBaseListener {
         } catch (java.io.IOException e) {
             System.out.println("problem creating directory");
         }
+        if (var instanceof Var)
+            string.get(0).get(6).append(((Var) var).defineAssign(muxes) + "\n");
 
-        string.get(0).get(6).append(var.defineAssign(muxes) + "\n");
         for (VerilogComp component : this.comps) {
             displayFiles(component, string);
         }
@@ -722,9 +729,10 @@ public class ProgramListener extends FSMBaseListener {
             con.print(name + name2 + "\n");
             con.print("always @ (posedge " + VerilogComp.getClkName() + ", posedge " +
                     VerilogComp.getResetName() + ")\n\tbegin\nif(" + VerilogComp.getResetName() +
-                    ")\n\t\tbegin\n" + conPath.get(4).toString() + "\t\t\tstate <= " + size + "'b0;" +
+                    ")\n\t\tbegin\n" + conPath.get(4).toString() + "\t\t\tstate <= " + size + "'b0;\n" +
+                            "\t\t\tnext_state <= " + size + "'b0;"+
                     "\n\t\tend\n\telse state <= next_state;\nend\n");
-            conPath.get(5).append("always @ (*)\n\tbegin\n\t\tcase(state)\n");
+            conPath.get(5).append("always @ (!" + VerilogComp.getResetName()+")\n\tbegin\n\t\tcase(state)\n");
             for (State state : this.states) {
                 state.setbinarystatenumber(size);
                 conPath.get(5).append(state.defState() + "\n");
@@ -918,7 +926,6 @@ public class ProgramListener extends FSMBaseListener {
             comp.close();
 
 
-
             /**
              * END
              */
@@ -975,8 +982,8 @@ public class ProgramListener extends FSMBaseListener {
                 if (var.getBitSize() < 2) {
                     for (VerilogComp comp2 : this.comps) {
                         if (comp2 instanceof Register) {
-                            for(VerilogComp comp3: this.regInputs.get(comp2)) {
-                                if (comp3 instanceof And && ((And)(comp3)).isAndInput(var)) {
+                            for (VerilogComp comp3 : this.regInputs.get(comp2)) {
+                                if (comp3 instanceof And && ((And) (comp3)).isAndInput(var)) {
 
                                     dataPath.get(1).append((var.getName() + ","));
                                     dataPath.get(2).append(var.defineInput());
@@ -987,8 +994,7 @@ public class ProgramListener extends FSMBaseListener {
                     }
                     conPath.get(0).append(var.getName() + ",");
                     conPath.get(2).append(var.defineInput());
-                }
-                else//else the input is more than one bit, and thus a data path input
+                } else//else the input is more than one bit, and thus a data path input
                 {
                     dataPath.get(1).append((var.getName() + ","));
                     dataPath.get(2).append(var.defineInput());

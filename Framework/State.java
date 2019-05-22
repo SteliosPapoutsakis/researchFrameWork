@@ -30,60 +30,52 @@ public class State {
     public String defState() {
         StringBuilder str = new StringBuilder("\t\t\t" + this.stateNumberBinary + ": begin \n");
         //first go through true conditions
-        HashMap<Integer,String> conditionals = new HashMap<>();
-        ArrayList<Integer> conditionNextState= new ArrayList<>();
-        boolean needTemp=false;
-        boolean needTempelse=false;
-        String elseT="";
+        HashMap<Integer, String> conditionals = new HashMap<>();
+        ArrayList<Integer> conditionNextState = new ArrayList<>();
+        boolean needTemp = false;
+        boolean needTempelse = false;
+        String elseT = "";
         String temp = "\t\t\t\t\tnext_state <= ";
+        String elseIf = "";
         for (Var var : this.conditionsorderl) {
-            if(var.getName().equals("NO_CONDITIONS")) {
-                needTemp=true;
-                temp+=IntToBinary.printToBinary(this.conditionsTrue.get(var),stateSize) + ";";
+            if (this.conditionsorderl.indexOf(var) > 0) elseIf = "else ";
+            if (var.getName().equals("NO_CONDITIONS")) {
+                needTemp = true;
+                temp += IntToBinary.printToBinary(this.conditionsTrue.get(var), stateSize) + ";";
                 continue;
             }
-            if(conditionsTrue.containsKey(var)&&!conditionals.containsKey(this.conditionsTrue.get(var)))
-            {
-                elseT="\t\t\t\telse\n";
-                conditionals.put(this.conditionsTrue.get(var),"if(" + var.getName());
+            if (conditionsTrue.containsKey(var) && !conditionals.containsKey(this.conditionsTrue.get(var))) {
+                elseT = "\t\t\t\telse\n";
+                conditionals.put(this.conditionsTrue.get(var), elseIf + "if(" + var.getName());
                 conditionNextState.add(this.conditionsTrue.get(var));
-            }
-            else if(conditionsTrue.containsKey(var))
-            {
-                conditionals.put(this.conditionsTrue.get(var),conditionals.get(this.conditionsTrue.get(var))
-                        +" && " +var.getName());
+            } else if (conditionsTrue.containsKey(var)) {
+                conditionals.put(this.conditionsTrue.get(var), conditionals.get(this.conditionsTrue.get(var))
+                        + " && " + var.getName());
             }
         }
         // then go through false conditions
         for (Var var : this.conditionsorderl) {
 
-            if(conditionsFalse.containsKey(var)&&!conditionals.containsKey(this.conditionsFalse.get(var)))
-            {
-                elseT="\t\t\t\telse\n";
-                conditionals.put(this.conditionsFalse.get(var),"if(!" + var.getName());
+            if (conditionsFalse.containsKey(var) && !conditionals.containsKey(this.conditionsFalse.get(var))) {
+                elseT = "\t\t\t\telse\n";
+                conditionals.put(this.conditionsFalse.get(var), elseIf + "if(!" + var.getName());
                 conditionNextState.add(this.conditionsFalse.get(var));
-            }
-            else if(conditionsFalse.containsKey(var))
-            {
-                conditionals.put(this.conditionsFalse.get(var),conditionals.get(this.conditionsFalse.get(var))
-                        +" && !" +var.getName());
+            } else if (conditionsFalse.containsKey(var)) {
+                conditionals.put(this.conditionsFalse.get(var), conditionals.get(this.conditionsFalse.get(var))
+                        + " && !" + var.getName());
             }
         }
 
 
         //puting all the branching statments now
-        for(Integer i:conditionNextState)
-        {
-                str.append("\t\t\t\t" + conditionals.get(i) + ")\n");
-                str.append("\t\t\t\t\t" + "next_state <= " + IntToBinary.printToBinary(i,stateSize) + ";\n");
+        for (Integer i : conditionNextState) {
+            str.append("\t\t\t\t" + conditionals.get(i) + ")\n");
+            str.append("\t\t\t\t\t" + "next_state <= " + IntToBinary.printToBinary(i, stateSize) + ";\n");
 
 
         }
-        if(needTemp)
-        str.append(elseT+temp+"\n");
-
-
-
+        if (needTemp)
+            str.append(elseT + temp + "\n");
 
 
         // go through variable assignments
@@ -91,14 +83,13 @@ public class State {
             str.append(defAssignemts(var, this.assignments.get(var)));
 
         // define Mux select
-        str.append(defMuxSelect(this.selectSize));
+        if (this.selectSize != 0)
+            str.append(defMuxSelect(this.selectSize));
 
 
         return str.toString();
 
     }
-
-
 
 
     public String defAssignemts(Var var, int number) {
@@ -116,15 +107,15 @@ public class State {
                 String nameofinputforState = this.select.get(mux).get(stateNumber).getName();
                 boolean assigmentsEqual = nameOfinputatIndex.equals(nameofinputforState);
                 System.out.println("This is the assigment for this mux " + mux.getName() + " for this state " +
-                    this.stateNumber + " " + nameofinputforState + "\n" +
-                " this is the assigment at this index " + i + " " + nameOfinputatIndex + " do they equal? \n" +
-                assigmentsEqual);
-                    if(assigmentsEqual) {
-                        System.out.println("They equaled! this is the binary encoding " +
-                                IntToBinary.strickBinary(i, mux.getSelectionSize()));
-                        str.append(IntToBinary.strickBinary(i, mux.getSelectionSize()));
-                        break;
-                    }
+                        this.stateNumber + " " + nameofinputforState + "\n" +
+                        " this is the assigment at this index " + i + " " + nameOfinputatIndex + " do they equal? \n" +
+                        assigmentsEqual);
+                if (assigmentsEqual) {
+                    System.out.println("They equaled! this is the binary encoding " +
+                            IntToBinary.strickBinary(i, mux.getSelectionSize()));
+                    str.append(IntToBinary.strickBinary(i, mux.getSelectionSize()));
+                    break;
+                }
 
             }
         }
