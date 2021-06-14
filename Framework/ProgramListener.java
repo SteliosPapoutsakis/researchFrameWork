@@ -386,7 +386,52 @@ public class ProgramListener extends FSMBaseListener {
 
         }
     }
+    @Override
+    public void enterOr_assigment(FSMParser.Or_assigmentContext ctx) {
+        Register reg;
+        // if this is coming from a Register_Assign context
+        if (ctx.getParent() instanceof FSMParser.Register_assignContext) {
 
+
+            FSMParser.Register_assignContext regCont = (FSMParser.Register_assignContext) ctx.getParent();
+            reg = (Register) findComp(regCont.register().NAME().getText());
+
+
+            Or newOr = null;
+            int j = 1;
+
+            // giving it a unique name
+            for (int i = 0; i < regCont.getChildCount(); i++) {
+                if (findComp("Sub_" + j + reg.getName()) == null) {
+                    newOr = new Or("Or_" + j + reg.getName(), reg.getBitSize());
+                    this.comps.add(newOr);
+                    this.regInputs.get(reg).add(newOr);
+                    break;
+                }
+                j++;
+            }
+
+
+            // finding 1st input for Or
+            if (ctx.expression(0).register() != null)
+                newOr.addInput(findComp(ctx.expression(0).register().NAME().getText()), 0);
+            else if (ctx.expression(0).integer() != null)
+                newOr.addInput(new FixedNumber(Integer.parseInt(ctx.expression(0).integer().getText()), reg.getBitSize()), 0);
+            else if (ctx.expression(0).var() != null)
+                newOr.addInput(findComp(ctx.expression(0).var().NAME().getText()), 0);
+
+            //finding second input for Or
+            if (ctx.expression(1).register() != null)
+                newOr.addInput(findComp(ctx.expression(1).register().NAME().getText()), 1);
+            else if (ctx.expression(1).integer() != null)
+                newOr.addInput(new FixedNumber(Integer.parseInt(ctx.expression(1).integer().getText()), reg.getBitSize()), 1);
+            else if (ctx.expression(1).var() != null)
+                newOr.addInput(findComp(ctx.expression(1).var().NAME().getText()), 1);
+
+
+        }
+
+    }
     @Override
     public void enterAnd_assigment(FSMParser.And_assigmentContext ctx) {
         Register reg;
@@ -853,6 +898,14 @@ public class ProgramListener extends FSMBaseListener {
                     "always @ (*) begin\n" +
                     "c <= a & b;\n" +
                     "end\n" +
+                    "endmodule\n");
+            adder.print("module Or(c,a,b);\n" +
+                    "parameter SIZE = 8;\n" +
+                    "output reg [SIZE-1:0] c;\n" +
+                    "input [SIZE-1:0] a,b;\n" +
+                    "always @ (*) begin\n" +
+                    "c <= a | b;\n" +
+                    "end\n" +
                     "endmodule");
 
             adder.close();
@@ -1029,7 +1082,7 @@ public class ProgramListener extends FSMBaseListener {
 
         } else if (comp instanceof Adder || comp instanceof Mux || comp instanceof Comp ||
                 comp instanceof Multiplier || comp instanceof Subtractor || comp instanceof Divider || comp
-                instanceof And) {
+                instanceof And || comp instanceof Or) {
             dataPath.get(5).append(comp.defineWire());
             dataPath.get(6).append(comp.defineComp());
         }

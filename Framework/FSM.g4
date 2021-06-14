@@ -46,8 +46,8 @@ outputs: OUTPUT(register|var)*;
 
 fragment UPPERCASE: ('A'..'Z');
 fragment LOWERCASE: ('a'..'z');
-AND: 'and' | 'And' | '&&';
-OR: 'or' | 'Or' | '||';
+AND: 'and' | 'And' | '&';
+OR: 'or' | 'Or' | '|';
 Clk: 'C_';
 RESET: 'R_';
 EQUALS: 'equals' | '==';
