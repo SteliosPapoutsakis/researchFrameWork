@@ -190,7 +190,7 @@ public class ProgramListener extends FSMBaseListener {
             int j = 1;
 
             // giving it a unique name
-            for (int i = 0; i < regCont.getChildCount(); i++) {
+            while(true) {
                 if (findComp("Adder_" + j + reg.getName()) == null) {
                     newAdder = new Adder("Adder_" + j + reg.getName(), reg.getBitSize());
                     this.comps.add(newAdder);
@@ -238,7 +238,7 @@ public class ProgramListener extends FSMBaseListener {
             int j = 1;
 
             // giving it a unique name
-            for (int i = 0; i < regCont.getChildCount(); i++) {
+            while(true) {
                 if (findComp("Mult_" + j + reg.getName()) == null) {
                     mult = new Multiplier("Mult_" + j + reg.getName(), reg.getBitSize());
                     this.comps.add(mult);
@@ -284,7 +284,7 @@ public class ProgramListener extends FSMBaseListener {
             int j = 1;
 
             // giving it a unique name
-            for (int i = 0; i < regCont.getChildCount(); i++) {
+            while(true) {
                 if (findComp("Div_" + j + reg.getName()) == null) {
                     div = new Divider("Div_" + j + reg.getName(), reg.getBitSize());
                     this.comps.add(div);
@@ -330,7 +330,7 @@ public class ProgramListener extends FSMBaseListener {
             int j = 1;
 
             // giving it a unique name
-            for (int i = 0; i < regCont.getChildCount(); i++) {
+            while(true) {
                 if (findComp("Sub_" + j + reg.getName()) == null) {
                     newSub = new Subtractor("Sub_" + j + reg.getName(), reg.getBitSize());
                     this.comps.add(newSub);
@@ -401,8 +401,8 @@ public class ProgramListener extends FSMBaseListener {
             int j = 1;
 
             // giving it a unique name
-            for (int i = 0; i < regCont.getChildCount(); i++) {
-                if (findComp("Sub_" + j + reg.getName()) == null) {
+            while(true) {
+                if (findComp("Or_" + j + reg.getName()) == null) {
                     newOr = new Or("Or_" + j + reg.getName(), reg.getBitSize());
                     this.comps.add(newOr);
                     this.regInputs.get(reg).add(newOr);
@@ -447,8 +447,8 @@ public class ProgramListener extends FSMBaseListener {
             int j = 1;
 
             // giving it a unique name
-            for (int i = 0; i < regCont.getChildCount(); i++) {
-                if (findComp("Sub_" + j + reg.getName()) == null) {
+            while(true) {
+                if (findComp("And_" + j + reg.getName()) == null) {
                     newand = new And("And_" + j + reg.getName(), reg.getBitSize());
                     this.comps.add(newand);
                     this.regInputs.get(reg).add(newand);
