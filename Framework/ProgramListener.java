@@ -525,21 +525,18 @@ public class ProgramListener extends FSMBaseListener {
             compare2 = findComp(ctx.expression().register().NAME().getText());
         }
 
-        String text = compare1.getName().substring(0, 1) + compare2.getName().substring(0, 1) + ctx.opp.getType();
+        // if the opp type is not equals, append the equals ctx number, as we do not want to make
+        // another flag if the equals flag exists
+        int ctx_opp = (ctx.opp.getType()==19)?16:ctx.opp.getType();
+        String text = compare1.getName().substring(0, 1) + compare2.getName().substring(0, 1) + ctx_opp;
         FSMParser.Next_stateContext context = (FSMParser.Next_stateContext) ctx.getParent();
         int nextState = Integer.parseInt(
                 context.STATENUMBER().getText().substring(6, context.STATENUMBER().getText().length()));
+
         //if there is no flag for this condition, make a variable and give it to conditionsTrue map
         if (findComp("flag_" + text) == null) {
 
-            if (ctx.opp.getType() == 17) {
-                text = text.substring(0, text.length() - 2) + "14";
-                if (findComp("flag_" + text) != null) {
-                    this.conditions.get(1).put((Var) findComp("flag_" + text), nextState);
-                    this.conditionsOrder.add((Var) findComp("flag_" + text));
-                    return;
-                }
-            }
+
             Var output = new Var("flag_" + text,
                     1, false, true, false);
             if (!(this.compInputs.containsKey(compare1.getName() + "|" + compare2.getName()))) {
@@ -585,12 +582,12 @@ public class ProgramListener extends FSMBaseListener {
             this.conditionsOrder.add((Var) findComp("flag_" + text));
         } else {
             Var output = (Var) findComp("flag_" + text);
-            if (ctx.opp.getType() == 17) {
+            if (ctx.opp.getType() == 19) {
                 this.conditions.get(1).put(output, nextState);
                 if (!this.conditionsOrder.contains(output))
                 this.conditionsOrder.add(output);
-            } else if (ctx.opp.getType() == 14 || ctx.opp.getType() == 15
-                    || ctx.opp.getType() == 16) {
+            } else if (ctx.opp.getType() == 16 || ctx.opp.getType() == 17
+                    || ctx.opp.getType() == 18) {
                 this.conditions.get(0).put(output, nextState);
                 if (!this.conditionsOrder.contains(output))
                 this.conditionsOrder.add(output);

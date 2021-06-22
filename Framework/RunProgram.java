@@ -11,66 +11,38 @@ import java.nio.file.Paths;
 
 public class RunProgram {
     public static void main(String[] args) {
-        String fileName = "poly2";
+        String fileName = "StelliTest";
         String file ="Start FSM\n" +
-                "input Size 1 Var start Size 8 Var x \n" +
-                "output Size 1 Var busy Size 8 Reg sum\n" +
-                "State:0 Define \n" +
-                "Size 8 Reg prod = 4\n" +
-                "Size 2 Reg n = 2   \n" +
-                "Size 8 Reg rx = Var x\n" +
-                "Reg sum = 0  \n" +
+                "input Size 1 Var start Size 8 Var n \n" +
+                "output Size 1 Var busy Size 8 Reg r1 \n" +
+                "State:0 Define\n" +
+                "Size 8 Reg A = Var n   \n" +
+                "Reg r1 = 0   \n" +
+                "Size 8 Reg r0 = 1   \n" +
                 "Var busy = 0   \n" +
                 "Next State if Var start==1 State:1\n" +
                 "Next State State:0\n" +
                 "End\n" +
                 "State:1 Define\n" +
-                "Reg prod = Reg prod * Reg rx\n" +
-                "Reg n = Reg n - 1\n" +
-                "Reg rx = Reg rx\n" +
-                "Reg sum = Reg sum\n" +
-                "Var busy = 1\n" +
-                "Next State if Reg n==0 State:2\n" +
-                "Next State State:1\n" +
+                "Reg A = Reg A\n" +
+                "Reg r1 = Reg r1\n" +
+                "Reg r0 = Reg r0\n" +
+                "Var busy = 1   \n" +
+                "Next State if Reg A==0 State:3\n" +
+                "Next State if Reg A~=0 State:2\n" +
                 "End\n" +
                 "State:2 Define\n" +
-                "Reg n = 1\n" +
-                "Reg prod = 6\n" +
-                "Reg rx = Reg rx\n" +
-                "Reg sum = Reg sum + Reg prod    \n" +
+                "Reg A = Reg A -  1\n" +
+                "Reg r1 = Reg r1 + Reg  r0\n" +
+                "Reg r0 = Reg r1   \n" +
                 "Var busy = 1   \n" +
-                "Next State State:3\n" +
+                "Next State if Reg A==0 State:3\n" +
+                "Next State State:2\n" +
                 "End\n" +
                 "State:3 Define\n" +
-                "Reg prod = Reg prod * Reg rx\n" +
-                "Reg n = Reg n - 1\n" +
-                "Reg rx = Reg rx\n" +
-                "Reg sum = Reg sum\n" +
-                "Var busy = 1\n" +
-                "Next State if Reg n==0 State:4\n" +
-                "Next State State:3\n" +
-                "End\n" +
-                "State:4 Define\n" +
-                "Reg prod = Reg prod\n" +
-                "Reg rx = Reg rx\n" +
-                "Reg n = Reg n \n" +
-                "Reg sum = Reg sum + Reg prod \n" +
-                "Var busy = 1   \n" +
-                "Next State State:5\n" +
-                "End\n" +
-                "State:5 Define\n" +
-                "Reg prod = Reg prod\n" +
-                "Reg rx = Reg rx\n" +
-                "Reg n = Reg n \n" +
-                "Reg sum = Reg sum + 7\n" +
-                "Var busy = 1   \n" +
-                "Next State State:6\n" +
-                "End\n" +
-                "State:6 Define\n" +
-                "Reg prod = Reg prod\n" +
-                "Reg rx = Reg rx\n" +
-                "Reg n = Reg n \n" +
-                "Reg sum = Reg sum \n" +
+                "Reg A = Reg A\n" +
+                "Reg r1 = Reg r1\n" +
+                "Reg r0 = Reg r0\n" +
                 "Var busy = 0   \n" +
                 "Next State State:3\n" +
                 "End\n" +

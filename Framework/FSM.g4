@@ -5,12 +5,14 @@ fsm: 'Start FSM' inputs outputs
 
 next_state: 'Next State' condition? STATENUMBER ;
 
-condition: ('if' (register|var)
-           opp=(GREATERTHAN|LESSTHAN|EQUALS|NOT) expression);
+condition: ('if' ( '('? condition_expression opp=(LOGICAND|LOGICOR))* condition_expression );
+
+condition_expression: (register|var)
+           opp=(GREATERTHAN|LESSTHAN|EQUALS|NOT) expression;
 
 state: STATENUMBER 'Define' ((register_assign)
 |(adder_assign)
- | var_assign)* next_state* 'End'
+ | var_assign)* next_state* 'Endl'
  ;
 
 register_assign: register (reg_assigment|adder_assign|sub_assignment|mult_assigment|div_assigment|and_assigment|or_assigment);
@@ -64,7 +66,8 @@ NAME: (UPPERCASE |LOWERCASE)+(INT)*;
 STATENUMBER: 'State:' INT+;
 NEGATIVEINT : '-'INT;
 INT: ('0'..'9')+;
-
+LOGICOR: '||';
+LOGICAND: '&&';
 
 WHITESPACE: (' '|'\t') ->skip;
 NEWLINE: ('\n'|'\r') ->skip;
