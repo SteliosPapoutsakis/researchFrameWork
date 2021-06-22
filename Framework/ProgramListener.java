@@ -774,7 +774,7 @@ public class ProgramListener extends FSMBaseListener {
                     ")\n\t\tbegin\n" + conPath.get(4).toString() + "\t\t\tstate <= " + size + "'b0;\n" +
                             "\t\t\tnext_state <= " + size + "'b0;"+
                     "\n\t\tend\n\telse state <= next_state;\nend\n");
-            conPath.get(5).append("always @ (!" + VerilogComp.getResetName()+")\n\tbegin\n\t\tcase(state)\n");
+            conPath.get(5).append("always @ (*)\n\tbegin\n\t\tcase(state)\n");
             for (State state : this.states) {
                 state.setbinarystatenumber(size);
                 conPath.get(5).append(state.defState() + "\n");
