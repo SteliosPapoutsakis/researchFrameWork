@@ -621,7 +621,14 @@ public class ProgramListener extends FSMBaseListener {
         for (String str : this.compInputs.keySet()) {
             VerilogComp comp1 = findComp(str.substring(0, str.indexOf('|')));
             VerilogComp comp2 = findComp(str.substring(str.indexOf('|') + 1, str.length()));
-            this.comps.add(new Comp(this.compInputs.get(str), comp1, comp2));
+            int i = 0;
+            while(true) {
+                if(findComp("comp_" + comp1.getName().substring(0,1) + comp2.getName().substring(0,1) + i) == null) {
+                    this.comps.add(new Comp("comp_" + comp1.getName().substring(0,1) + comp2.getName().substring(0,1) + i,this.compInputs.get(str), comp1, comp2));
+                    break;
+                }
+                i++;
+            }
 
         }
         for (VerilogComp comp : this.comps) {

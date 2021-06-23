@@ -14,8 +14,8 @@ public class Comp extends VerilogComp {
     private VerilogComp comp2; // compare component 2
 
 
-    public Comp(Var[] flag, VerilogComp comp, VerilogComp comp2) {
-        super("comp_" + comp.getName().substring(0,1) + comp2.getName().substring(0,1), comp.getBitSize(), false, false);
+    public Comp(String name, Var[] flag, VerilogComp comp, VerilogComp comp2) {
+        super(name, comp.getBitSize(), false, false);
         this.flag = flag;
         this.comp = comp;
         this.comp2 = comp2;

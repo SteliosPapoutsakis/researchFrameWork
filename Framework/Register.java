@@ -35,7 +35,7 @@ public class Register extends VerilogComp {
     @Override
     public String defineReg() {
         int bit = this.getBitSize() - 1;
-        if (bit > 1)
+        if (bit > 0)
             return "wire " + "[" + bit + ":0] " + this.getName() + ";\n";
         return "wire " + this.getName() + ";\n";
     }
